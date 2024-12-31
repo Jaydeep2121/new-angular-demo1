@@ -1,0 +1,71 @@
+
+<div class="d-flex d-lg-none align-items-center ms-n2 me-2" title="Show aside menu">
+  <div class="btn btn-icon btn-active-icon-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+    <span [inlineSVG]="'../../../../assets/media/icons/duotune/abstract/abs015.svg'" class="svg-icon svg-icon-1 mt-1"></span>
+  </div>
+</div>
+
+<div [ngClass]="isSmallScreen ? 'py-9 offcanvas offcanvas-start custom-offcanvas' : 'aside py-9 aside-dark aside-hoverable'" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div  [ngClass]="isSmallScreen ? 'small-aside-menu' : 'aside-menu'" class="flex-column-fluid ps-5 pe-3 mb-9">
+    <div
+      #ktAsideScroll
+      class="w-100 hover-scroll-overlay-y d-flex pe-2"
+    >
+      <div
+        data-kt-menu="true"
+        class="menu menu-column menu-rounded fw-bold my-auto"
+      >
+        <app-aside-menu></app-aside-menu>
+      </div>
+    </div>
+  </div>
+  <div class="aside-footer flex-column-auto px-9">
+    <div class="d-flex flex-stack">
+      <div ngbDropdown [ngClass]="isSmallScreen ? 'small-profile-drop' : 'profile-drop'"  class="ms-1 d-flex" >
+        <div [ngClass]="isSmallScreen ? 'me-4' : 'me-5'" [ngClass]="(userType=='master' && !isSmallScreen)?'me-3':'me-5'" class="profile-section d-flex align-items-center">
+          <div class="symbol symbol-circle symbol-40px">
+            <img src="./assets/media/avatars/300-1.jpg" class="sidebar-image" width="40" height="40" alt="photo">
+          </div>
+          <div class="ms-2" *ngIf="user$ | async as _user">
+            <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder lh-1">{{ _user.username }}</a>
+            <span class="text-muted fw-bold d-block fs-7 lh-1">{{ _user.role | titlecase }}</span>
+          </div>          
+        </div>
+        <div
+          id="profile-dropdown"
+          ngbDropdownToggle
+          class="btn btn-sm btn-icon profile-setting position-relative me-n2"
+        >
+          <img src="./assets/media/icons/duotune/coding/cod001.svg" alt="metronic" />
+        </div>
+        <div ngbDropdownMenu aria-labelledby="profile-dropdown" class="dropdown-body">
+            <div class="menu-item" *ngIf="user$ | async as _user">
+              <div class="menu-content d-flex align-items-center p-0">
+                <!-- <div class="symbol symbol-50px">
+                  <img alt="Logo" src="./assets/media/avatars/300-1.jpg" />
+                </div> -->
+          
+                <div class="d-flex flex-column ms-2">
+                  <!-- <div class="fw-bolder d-flex align-items-center fs-5">
+                    <span class="user-drop-name">
+                      test_name<br>test_lastname
+                    </span>
+                    <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2"
+                      >Pro</span
+                    >
+                  </div> -->
+                  <a class="fw-bold text-muted text-hover-primary fs-7 usr-email cursor-pointer">
+                    {{ _user.userID }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          
+            <div class="menu-item px-5">
+              <a (click)="logout()" class="menu-link px-5 cursor-pointer"> Sign Out </a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

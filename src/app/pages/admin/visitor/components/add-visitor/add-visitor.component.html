@@ -1,0 +1,336 @@
+<div class="collapse show">   
+    <div class="fetch-section" *ngIf="userVisit">
+      <h3 class="fw-bold">All details</h3>
+      <form *ngIf="screeenMode===preReg" [formGroup]="fetchvisitorForm">
+        <div class="mb-6">
+          <input type="text" class="
+                form-control form-control-lg form-control-solid
+                mb-3 mb-lg-0
+              "
+              [class.user-input-txtbox]="userVisit"
+              placeholder="Mobile Number"
+              formControlName="mobileNum"
+              (input)="onMobileNumChange()"
+            />
+            <span class="error-text" *ngIf="fetchvisitorForm.get('mobileNum')?.errors?.['pattern']">
+              *Please enter a valid Mobile number
+            </span>
+            <span class="error-text"
+                *ngIf="isControlInvalidFetchVis('mobileNum') && !fetchvisitorForm.get('mobileNum')?.errors?.['pattern']">
+                *Mobile number is required
+            </span>
+        </div>
+        <div class="mb-6">
+            <button [disabled]="!fetchvisitorForm.valid" (click)="fetchVisitor()" type="button" class="btn user-input-txtbox bordernone user-input-btn">Fetch Visitor</button>
+        </div>
+      </form>
+    </div>
+    <form novalidate class="form" [formGroup]="visitorForm">
+      <div class="card-body p-2">
+        <div class="mb-6" [class.row]="!userVisit">
+          <div [class.col-lg-12]="!userVisit">
+            <div [class.row]="!userVisit">
+              <div [ngClass]="{'col-lg-6 fv-row': !userVisit}">
+                <input type="text" class="
+                    form-control form-control-lg form-control-solid
+                    mb-3 mb-lg-0
+                  "
+                  placeholder="First name"
+                  [class.user-input-txtbox]="userVisit"
+                  formControlName="firstName"
+                />
+                <span class="error-text"
+                    *ngIf="isControlInvalidWrapper('firstName')">
+                    *FirstName is required
+                </span>
+              </div>
+              <div [ngClass]="{'col-lg-6 fv-row': !userVisit}">
+                <input
+                  type="text"
+                  [class.user-input-txtbox]="userVisit"
+                  class="form-control form-control-lg form-control-solid"
+                  placeholder="Last name"
+                  formControlName="lastName"
+                />
+                <span class="error-text"
+                    *ngIf="isControlInvalidWrapper('lastName')">
+                    *LastName is required
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-6" [class.row]="!userVisit">
+          <div [class.col-lg-12]="!userVisit">
+            <div [class.row]="!userVisit">
+              <div [ngClass]="{'col-lg-6 fv-row': !userVisit}">
+                <input type="text" class="
+                      form-control form-control-lg form-control-solid
+                      mb-3 mb-lg-0
+                    "
+                    placeholder="Phone"
+                    [class.user-input-txtbox]="userVisit"
+                    formControlName="phone"
+                  />
+                  <span class="error-text" *ngIf="visitorForm.get('phone')?.errors?.['pattern']">
+                    *Please enter a valid PhoneNo
+                  </span>
+                  <span class="error-text"
+                      *ngIf="isControlInvalidWrapper('phone') && !visitorForm.get('phone')?.errors?.['pattern']">
+                      *PhoneNo is required
+                  </span>
+                </div>
+                <div [ngClass]="{'col-lg-6 fv-row': !userVisit}">
+                  <input
+                    type="text"
+                    [class.user-input-txtbox]="userVisit"
+                    class="form-control form-control-lg form-control-solid"
+                    placeholder="Email"
+                    formControlName="email"
+                  />
+                  <span class="error-text"
+                    *ngIf="visitorForm.get('email')?.hasError('email') && isControlInvalidWrapper('email')">
+                    *Please enter a valid email
+                  </span>
+                  <span class="error-text"
+                      *ngIf="isControlInvalidWrapper('email') && visitorForm.get('email')?.hasError('required')">
+                      *Email is required
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="mb-6" [class.row]="!userVisit">
+          <div [class.col-lg-12]="!userVisit">
+            <input
+              type="text"
+              [class.user-input-txtbox]="userVisit"
+              class="form-control form-control-lg form-control-solid"
+              placeholder="Address"
+              formControlName="address"
+            />
+            <span class="error-text"
+                *ngIf="isControlInvalidWrapper('address')">
+                *Address is required
+            </span>
+          </div>
+        </div>
+        <div class="mb-6" [class.row]="!userVisit" *ngIf="screeenMode===regChe || screeenMode===preReg">
+          <div [class.col-lg-12]="!userVisit">
+            <input
+              type="text"
+              [class.user-input-txtbox]="userVisit"
+              class="form-control form-control-lg form-control-solid"
+              placeholder="Reason"
+              formControlName="reason"
+            />
+            <span class="error-text"
+                *ngIf="isControlInvalidWrapper('reason')">
+                *Reason is required
+            </span>
+          </div>
+        </div>
+
+        <div class="mb-6" [class.row]="!userVisit" *ngIf="screeenMode===regChe || screeenMode===preReg">
+          <div [class.col-lg-12]="!userVisit">
+            <div [class.row]="!userVisit">
+              <div [class.mb-6]="userVisit" [ngClass]="{'col-lg-6 fv-row country-select': !userVisit}">
+                <ng-select formControlName="host" [items]="hostlistData" bindLabel="text"
+                  placeholder="Whom to meet" class="ng-class">
+                  <ng-template ng-label-tmp let-item="item">
+                      {{ item.text }}
+                  </ng-template>
+              </ng-select>
+              <span class="error-text" *ngIf="isControlInvalidWrapper('host')">
+                  *Please select host
+              </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-6" [class.row]="!userVisit" *ngIf="screeenMode===regChe">
+          <div [class.col-lg-12]="!userVisit">
+            <div [class.row]="!userVisit">
+              <div [class.mb-6]="userVisit" [ngClass]="{'col-lg-6 fv-row country-select': !userVisit}">
+                <ng-select formControlName="category" [items]="categorylistData" bindLabel="text" 
+                  placeholder="Select category" class="ng-class">
+                  <ng-template ng-label-tmp let-item="item">
+                      {{ item.text }}
+                  </ng-template>
+              </ng-select>
+              <span class="error-text" *ngIf="isControlInvalidWrapper('category')">
+                  *Please select Category
+              </span>
+              </div>
+            </div>
+          </div>
+          <div [class.col-lg-12]="!userVisit" *ngIf="isAddedOtherCategory">
+            <div [class.row]="!userVisit">
+              <div [class.mb-6]="userVisit" [ngClass]="{'col-lg-6 fv-row country-select': !userVisit}">
+                <input type="text" class="
+                    form-control form-control-lg form-control-solid
+                    mb-3 mb-lg-0
+                  "
+                  placeholder="other category"
+                  [class.user-input-txtbox]="userVisit"
+                  formControlName="OtherCategory"
+                />
+                <span class="error-text"
+                    *ngIf="isControlInvalidWrapper('OtherCategory')">
+                    *OtherCategory is required
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-6" [class.row]="!userVisit">
+          <div [class.col-lg-12]="!userVisit">
+            <div [class.row]="!userVisit">
+              <div [class.mb-6]="userVisit" [ngClass]="{'col-lg-6 fv-row country-select': !userVisit}">
+                <ng-select formControlName="country" [items]="visitorService.countryList | async" bindLabel="name" placeholder="Select a Country" class="ng-class">
+                  <ng-template ng-label-tmp let-item="item">
+                    {{ item.name }}
+                  </ng-template>
+                </ng-select>
+                <span class="error-text" *ngIf="isControlInvalidWrapper('country')">
+                  *Please select country
+                </span>
+              </div>
+              <div [ngClass]="{'col-lg-6 fv-row': !userVisit}">
+                <ng-select formControlName="state" [items]="stateList" bindLabel="name" placeholder="Select a State">
+                  <ng-template ng-label-tmp let-item="item">
+                    {{ item.name }}
+                  </ng-template>
+                </ng-select>
+                <span class="error-text" *ngIf="isControlInvalidWrapper('state')">
+                  *Please select state
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-6" [class.row]="!userVisit">
+          <div [class.col-lg-12]="!userVisit">
+            <div [class.row]="!userVisit">
+              <div [ngClass]="{'col-lg-6 fv-row city-select': !userVisit}">
+                <ng-select formControlName="city" [items]="citiesList" bindLabel="name" placeholder="Select a City">
+                  <ng-template ng-label-tmp let-item="item">
+                    {{ item.name }}
+                  </ng-template>
+                </ng-select>
+                <span class="error-text" *ngIf="isControlInvalidWrapper('city')">
+                  *Please select city
+                </span>
+              </div>
+              <div [ngClass]="{'col-lg-6 fv-row': !userVisit}" *ngIf="!userVisit">
+                <input type="file" accept=".png, .jpg, .jpeg" (change)="onFileChange($event)" (blur)="touched = true"
+                  class="form-control input-file" name="file" id="file" />
+                <label for="file"
+                  class="btn d-flex justify-content-between form-control form-control-lg form-control-solid align-items-center ">
+                  <span class="profile-name">Upload Your Photo</span>
+                  <i class="icon fa fa-upload"></i>
+                </label>
+                <div *ngIf="selectedFile && !file?.hasError('invalidFileType')">
+                  <div class="d-flex flex-column ">
+                    <small class="profile-name">{{ selectedFile.name }}</small>
+                    <div class="d-flex w-100 justify-content-between">
+                      <small class="profile-name">{{ getFileSize(selectedFile.size) }}</small>
+                      <i class="ki-outline ki-cross-circle text-gray-700" style="font-size: 22px;" (click)="removeSelectedFile()"></i>
+                    </div>
+                    </div>
+                    <div class="progress mt-1">
+                      <div class="progress-bar" role="progressbar" [style.width.%]="progress">
+                      {{ progress.toFixed(0) }}%
+                    </div>
+                  </div>
+                </div>
+                <span *ngIf="editFileName"><b>{{editFileName}}</b></span>
+                <small *ngIf="touched && !this.selectedFile" class="error-text">*File is required</small>
+                <small *ngIf="file?.hasError('invalidFileType') && this.selectedFile" class="error-text">*Please choose a
+                  PNG or
+                  JPG or JPEG file.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-6" class="row" [class.row]="!userVisit"  *ngIf="screeenMode!==regChe && screeenMode!==preReg">
+          <div [class.col-lg-12]="!userVisit">
+            <div  class="d-flex" [class.row]="!userVisit">
+              <div [ngClass]="{'col-lg-6 fv-row': !userVisit}" class="ps-6">
+                <label class="form-check-label">Blocked Entry</label>
+                <div class="d-flex align-items-center gap-3">
+                  <div class="form-check my-2">
+                    <input class="form-check-input me-4" type="radio" id="blockedTrue" name="blockedEntry" [value]="true" formControlName = "blockedEntry"/>
+                    <label class="form-check-label" for="blockedTrue">Yes</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input me-4" type="radio" id="blockedFalse" name="blockedEntry" [value]="false" formControlName = "blockedEntry"/>
+                    <label class="form-check-label" for="blockedFalse">No</label>
+                  </div>
+                  </div>
+                  <span class="error-text" *ngIf="isControlInvalidWrapper('blockedEntry')">
+                    *Please select blockentry
+                  </span>
+                  
+                  </div>
+                  <div [ngClass]="{'col-lg-6 fv-row': !userVisit}" class="ps-6">
+                    <label class="form-check-label">VIP Status</label>
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="form-check my-2">
+                        <input class="form-check-input me-4" type="radio" id="vipTrue" name="vipEntry" [value]="true" formControlName = "vipEntry" (change)="handleVIPStatusChange(false)"/>
+                        <label class="form-check-label" for="vipTrue">Yes</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input me-4" type="radio" id="vipFalse" name="vipEntry" [value]="false" formControlName = "vipEntry" (change)="handleVIPStatusChange()"/>
+                        <label class="form-check-label" for="vipFalse">No</label>
+                      </div>
+                    </div>
+                    <span class="error-text" *ngIf="isControlInvalidWrapper('vipEntry')">
+                      *Please select vipEntry
+                    </span>
+                  </div>
+                  </div>
+          </div>
+        
+        </div>
+
+        <div class="mb-6" [class.row]="!userVisit" *ngIf="screeenMode!==regChe && screeenMode!==preReg">
+          <div [class.col-lg-12]="!userVisit">
+            <div [class.row]="!userVisit">
+              <div [ngClass]="{'col-lg-6 fv-row': !userVisit}"></div>
+              <div [ngClass]="{'col-lg-6 fv-row': !userVisit}" *ngIf="isVIPStatus">
+                <ng-select formControlName="vipStatus" [items]="vipStatusList" bindLabel="name"
+                  placeholder="Select a VIP status">
+                  <ng-template ng-label-tmp let-item="item">
+                    {{ item.name }}
+                  </ng-template>
+                </ng-select>
+                <span class="error-text" *ngIf="isControlInvalidWrapper('vipStatus')">
+                  *Please select VIP status
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mb-3">
+          <span class="text-danger" *ngIf="errorMessage">
+            {{errorMessage}}
+          </span>
+          <span class="text-success" *ngIf="successText">
+            {{successText}}
+         </span>
+        </div>
+       <div *ngIf="!userVisit" class="card-footer d-flex justify-content-center align-items-center  w-100">
+        <button type="button" class="btn btn-outline-secondary border border-secondary cancel-btn" (click)="closeModal()" [disabled]="(isLoading$ | async)">Cancel</button>
+        <button [disabled]="!visitorForm.valid || (isLoading$ | async)" (click)="submitOrContinue(false)" type="button" class="btn btn-light-primary ms-2 submit-btn">
+          <span *ngIf="!(isLoading$ | async)">{{isEdit ? 'Edit' : 'Add'}}</span>
+          <span *ngIf="isLoading$ | async" class="spinner-border spinner-border-sm align-middle ms-2"></span>
+        </button>
+      </div>  
+      <div *ngIf="userVisit" class="next-button">
+        <button [disabled]="!visitorForm.valid" (click)="submitOrContinue(true)" type="button" class="btn user-input-txtbox user-input-btn fw-bold bordernone">{{screeenMode===preReg?nextBtn:checkInBtn}}</button>
+      </div>
+      </div>
+    </form>
+</div>

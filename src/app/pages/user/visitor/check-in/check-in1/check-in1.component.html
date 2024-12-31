@@ -1,0 +1,57 @@
+
+<div class="text-end">
+    <div>
+        <span *ngFor="let person of unPlannedList" (click)="openCheckNotificationModal(checkNofitication,person.isUnplannedAccepted,person.inviteId)" 
+              [ngClass]="{ 'text-success': person.isUnplannedAccepted, 'text-danger': !person.isUnplannedAccepted }">
+          {{ person.firstName }} {{ person.lastName }}<br>
+        </span>
+      </div>          
+</div>
+<ng-container>
+    <div class="checkin-header">
+     <app-back-button
+      (onClick)="onBackClickEmit($event)"
+      [text]="'Visitor Details'"
+     >
+     </app-back-button>
+      <div class="stepper stepper-links d-flex w-100 m-0 align-items-center justify-content-center">
+        <div class="stepper-nav m-0 w-50 d-flex align-items-center my-3">
+            <div class="stepper-item ms-auto m-0 d-flex align-items-center">
+                <i class="fa fa-circle text-dark fs-1 m-0"></i>
+            </div>
+            <hr class="stepper-rule mx-0">
+            <div class="stepper-item me-auto m-0 d-flex align-items-center">
+                <i class="fa fa-circle text-dark fs-1 m-0"></i>
+            </div>
+        </div>
+    </div>
+    </div>
+      <div class="checkin-body">
+        <app-add-visitor 
+          (onNext)="onNextEmit($event)"
+          [userVisit]="true">
+      </app-add-visitor>
+      </div>
+</ng-container>
+<ng-template #checkNofitication let-modal>
+    <div class="modal-header">
+      <div class="header-text">
+        <h4 class="modal-title fw-bold my-auto">Visitor Notifier</h4>
+      </div>
+      <button
+        type="button"
+        class="btn btn-icon form-close-button"
+        aria-label="Close"
+        (click)="modal.close('Close click')"
+      ><i class="ki-outline ki-cross-circle text-gray-700" style="font-size: 22px;"></i>
+      </button>
+    </div>
+      <div class="modal-body">
+        <app-notification-body
+            (onOKClick)="sendInviteId()"
+            (onCancelClick)="closeModal()"
+            [notificationMsg]="notificationMsg"
+        >
+        </app-notification-body>
+      </div>
+  </ng-template>

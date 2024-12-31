@@ -1,0 +1,92 @@
+<div class="container">
+    <div class="text-end">
+        <div>
+            <span *ngFor="let person of unPlannedList" (click)="openCheckNotificationModal(checkNofitication,person.isUnplannedAccepted,person.inviteId)" 
+                  [ngClass]="{ 'text-success': person.isUnplannedAccepted, 'text-danger': !person.isUnplannedAccepted }">
+              {{ person.firstName }} {{ person.lastName }}<br>
+            </span>
+          </div>          
+    </div>
+    <app-back-button
+        (onClick)="onBackClickEmit($event)"
+        [text]="'Visitor CheckIn'"
+    ></app-back-button>
+
+    <div class="input-type-container">
+        <label>
+            <input type="radio" name="inputType" [(ngModel)]="inputType" (change)="handleRadioChange()" value="qr">
+            QR Code
+        </label>
+        <label>
+            <input type="radio" name="inputType" [(ngModel)]="inputType" (change)="handleRadioChange()" value="text">
+            Invite Code
+        </label>
+       
+    </div>
+    <div class="qr-reader-container" [ngClass]="{'qr-code': inputType === 'qr'}">
+        <div id="reader" class="qr-reader"></div>
+        <div id="qr-reader-results" class="qr-reader-results"></div>
+    </div>
+    <div *ngIf="inputType === 'text'" class="row  mt-3 mb-6">
+        <div class="text-box-container w-100 d-flex flex-row ">
+            <input type="text" [(ngModel)]="inviteCode" class="form-control me-2"  placeholder="Enter Invite Code..">
+            <button (click)="getInvitecode()" class="btn btn-sm btn-outline-secondary " [disabled]="!inviteCode">Get</button>
+        </div>
+    </div>
+
+
+    <div  class="card-container"  [ngClass]="{'qr-code': inputType === 'qr'}">
+        <div class="card-content">
+            <div class="info-row">
+                <span class="label">First name</span>
+                <span class="value">{{ visitor.firstName }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Last name</span>
+                <span class="value">{{ visitor.lastName }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Mobile number</span>
+                <span class="value">{{ visitor.phoneNumber }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Email</span>
+                <span class="value">{{ visitor.email }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Country</span>
+                <span class="value">{{   countrydata?.name }}</span>
+            </div>
+        </div>
+    </div>
+
+    <span *ngIf="!!errorMessage" class="error-message">{{ errorMessage }}</span>
+    <span *ngIf="!!successMessage" class="text-success">{{ successMessage }}</span>
+    
+    <button class="check-in-btn mb-2" (click)="onGeneratePass()">Print</button>
+    
+    <button class="check-in-btn" (click)="checkIn()" [disabled]="!(qrResult.visitorId && qrResult.inviteId)">Check In</button>
+    
+</div>
+<ng-template #checkNofitication let-modal>
+    <div class="modal-header">
+      <div class="header-text">
+        <h4 class="modal-title fw-bold my-auto">Visitor Notifier</h4>
+      </div>
+      <button
+        type="button"
+        class="btn btn-icon form-close-button"
+        aria-label="Close"
+        (click)="modal.close('Close click')"
+      ><i class="ki-outline ki-cross-circle text-gray-700" style="font-size: 22px;"></i>
+      </button>
+    </div>
+      <div class="modal-body">
+        <app-notification-body
+            (onOKClick)="sendInviteId()"
+            (onCancelClick)="closeModal()"
+            [notificationMsg]="notificationMsg"
+        >
+        </app-notification-body>
+      </div>
+  </ng-template>

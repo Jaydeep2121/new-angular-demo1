@@ -1,0 +1,31 @@
+<div class="collapse show">
+    <form novalidate class="form" [formGroup]="manageGateForm">
+        <div class="card-body p-2">
+            <div class="mb-6">
+                <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Name"
+                    formControlName="name" />
+                <span class="error-text" *ngIf="isControlInvalidWrapper('name')">
+                    *name is required
+                </span>
+            </div>
+            <div class="mb-6">
+                <ng-select formControlName="gateType" [items]="gateTypeList" bindLabel="item"
+                    placeholder="Select a Gate Type" class="ng-class">
+                    <ng-template ng-label-tmp let-item="item">
+                        {{ item }}
+                    </ng-template>
+                </ng-select>
+                <span class="error-text" *ngIf="isControlInvalidWrapper('gateType')">
+                    *Please select GateType
+                </span>
+            </div>
+
+            <div class="card-footer d-flex justify-content-center align-items-center  w-100">
+                <button type="button" class="btn btn-outline-secondary border border-secondary cancel-btn"
+                    (click)="closeModal()">Cancel</button>
+                <button [disabled]="!manageGateForm.valid" (click)="submit()" type="button"
+                    class="btn btn-light-primary ms-2 submit-btn">Add</button>
+            </div>
+        </div>
+    </form>
+</div>

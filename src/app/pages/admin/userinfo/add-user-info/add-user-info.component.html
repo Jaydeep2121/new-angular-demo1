@@ -1,0 +1,184 @@
+<div class="collapse show">   
+  <form novalidate class="form" [formGroup]="visitorForm">
+    <div class="card-body p-2">
+      <div class="mb-6 row" >
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6 fv-row">
+              <input type="text" class="
+                  form-control form-control-lg form-control-solid
+                  mb-3 mb-lg-0
+                "
+                placeholder="First name"
+                formControlName="firstName"
+              />
+              <span class="error-text"
+                  *ngIf="isControlInvalidWrapper('firstName')">
+                  *FirstName is required
+              </span>
+            </div>
+            <div class='col-lg-6 fv-row'>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                placeholder="Middle name"
+                formControlName="middleName"
+              />
+              <span class="error-text"
+                  *ngIf="isControlInvalidWrapper('middleName')">
+                  *middleName is required
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-6 row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class='col-lg-6 fv-row'>
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                placeholder="Middle name"
+                formControlName="lastName"
+              />
+              <span class="error-text"
+                  *ngIf="isControlInvalidWrapper('lastName')">
+                  *lastName is required
+              </span>
+            </div>
+            <div class="col-lg-6 fv-row">
+              <input type="text" class="
+                    form-control form-control-lg form-control-solid
+                    mb-3 mb-lg-0
+                  "
+                  placeholder="Phone"
+                  formControlName="phone"
+                />
+                <span class="error-text" *ngIf="visitorForm.get('phone')?.errors?.['pattern']">
+                  *Please enter a valid PhoneNo
+                </span>
+                <span class="error-text"
+                    *ngIf="isControlInvalidWrapper('phone') && !visitorForm.get('phone')?.errors?.['pattern']">
+                    *PhoneNo is required
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="mb-6 row">
+        <div class="col-lg-12">
+          <input
+            type="text"
+            class="form-control form-control-lg form-control-solid"
+            placeholder="Address"
+            formControlName="address"
+          />
+          <span class="error-text"
+              *ngIf="isControlInvalidWrapper('address')">
+              *Address is required
+          </span>
+        </div>
+      </div>
+
+      <div class="mb-6 row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6 fv-row country-select">
+              <ng-select formControlName="country" [items]="countriesList" bindLabel="name" placeholder="Select a Country" class="ng-class">
+                <ng-template ng-label-tmp let-item="item">
+                  {{ item.name }}
+                </ng-template>
+              </ng-select>
+              <span class="error-text" *ngIf="isControlInvalidWrapper('country')">
+                *Please select country
+              </span>
+            </div>
+            <div class="col-lg-6 fv-row">
+              <ng-select formControlName="state" [items]="stateList" bindLabel="name" placeholder="Select a State">
+                <ng-template ng-label-tmp let-item="item">
+                  {{ item.name }}
+                </ng-template>
+              </ng-select>
+              <span class="error-text" *ngIf="isControlInvalidWrapper('state')">
+                *Please select state
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-6 row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6 fv-row city-select">
+              <ng-select formControlName="city" [items]="citiesList" bindLabel="name" placeholder="Select a City">
+                <ng-template ng-label-tmp let-item="item">
+                  {{ item.name }}
+                </ng-template>
+              </ng-select>
+              <span class="error-text" *ngIf="isControlInvalidWrapper('city')">
+                *Please select city
+              </span>
+            </div>
+            <div class="col-lg-6 fv-row">
+              <input type="file" accept=".png, .jpg, .jpeg" (change)="onFileChange($event)" (blur)="touched = true"
+                class="form-control input-file" name="file" id="file" />
+              <label for="file"
+                class="btn d-flex justify-content-between form-control form-control-lg form-control-solid align-items-center ">
+                <span class="profile-name">Upload Your Photo</span>
+                <i class="icon fa fa-upload"></i>
+              </label>
+              <div *ngIf="selectedFile && !file?.hasError('invalidFileType')">
+                <div class="d-flex flex-column ">
+                  <small class="profile-name">{{ selectedFile.name }}</small>
+                  <div class="d-flex w-100 justify-content-between">
+                    <small class="profile-name">{{ getFileSize(selectedFile.size) }}</small>
+                    <i class="ki-outline ki-cross-circle text-gray-700" style="font-size: 22px;" (click)="removeSelectedFile()"></i>
+                  </div>
+                  </div>
+                  <div class="progress mt-1">
+                    <div class="progress-bar" role="progressbar" [style.width.%]="progress">
+                    {{ progress.toFixed(0) }}%
+                  </div>
+                </div>
+              </div>
+              <small *ngIf="touched && !this.selectedFile" class="error-text">*File is required</small>
+              <small *ngIf="file?.hasError('invalidFileType') && this.selectedFile" class="error-text">*Please choose a
+                PNG or
+                JPG or JPEG file.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-6 d-flex row">
+        <div class="mb-6 col-6" >
+          <ng-select formControlName="roleType" [items]="roleList" bindLabel="item" placeholder="Select a Role">
+            <ng-template ng-label-tmp let-item="item">
+              {{ item }}
+            </ng-template>
+          </ng-select>
+          <span class="error-text" *ngIf="isControlInvalidWrapper('roleType')">
+            *Please select Role
+          </span>
+        </div>
+        <div class="col-6">
+          <ng-select formControlName="activeType" [items]="activeList" bindLabel="item"
+            placeholder="Select a Active">
+            <ng-template ng-label-tmp let-item="item">
+              {{ item }}
+            </ng-template>
+          </ng-select>
+          <span class="error-text" *ngIf="isControlInvalidWrapper('activeType')">
+            *Please select active
+          </span>
+        </div>
+      </div>
+      
+     <div class="card-footer d-flex justify-content-center align-items-center  w-100">
+      <button type="button" class="btn btn-outline-secondary border border-secondary cancel-btn" (click)="closeModal()">Cancel</button>
+      <button [disabled]="!visitorForm.valid" (click)="submitForm()" type="button" class="btn btn-light-primary ms-2 submit-btn">{{isEdit ? 'Edit' : 'Add'}}</button>
+    </div>
+    </div>
+  </form>
+</div>

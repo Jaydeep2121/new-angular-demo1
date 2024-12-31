@@ -1,0 +1,137 @@
+.aside {
+    position: fixed;
+    top: 50px;
+    bottom: 50px;
+    left: 50px;
+    z-index: 100;
+    overflow: hidden;
+    width: 300px;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #f2f3f5;
+    padding: 0;
+}
+.py-9 {
+    padding-top: 2.25rem !important;
+    padding-bottom: 2.25rem !important;
+}
+.flex-stack {
+    justify-content: space-between;
+    align-items: center;
+}
+.px-5 {
+    padding-right: 1.25rem !important;
+    padding-left: 1.25rem !important;
+}
+.ps-5 {
+    padding-left: 1.25rem !important;
+}
+.px-9 {
+    padding-right: 2.25rem !important;
+    padding-left: 2.25rem !important;
+}
+.text-gray-800 {
+    text-decoration: none;
+    color:  #3f4254!important;
+}
+.sidebar-image{
+    border-radius:50%;
+}
+
+.profile-setting{
+    outline: none;
+    border: none;
+}
+.dropdown-toggle::after {
+    display:none;
+}
+.custom-offcanvas {
+    width: 270px; 
+  }
+  
+  .small-aside-menu {
+    width: 100%; 
+  }
+.profile-drop,
+.small-profile-drop {
+    z-index: 105;
+    position: fixed;
+    inset: auto 0px 0px auto;
+    margin: 0px;
+}
+
+.profile-drop {
+    position: absolute;
+    padding: 33px 10px;
+}
+
+.small-profile-drop {
+    width: 100%;
+    padding: 15px;
+}
+.dropdown-body{
+    box-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15);
+    border-radius: 0.65rem;
+    background-color: #ffffff;
+    border: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    @media (max-width: 992px) {
+        transform: translate(10px, -66px) !important;
+    }
+}  
+.symbol.symbol-50px > img {
+    width: 50px;
+    height: 50px;
+    border-radius: 0.65rem;
+    vertical-align: middle;
+}
+.menu-item .menu-content {
+    padding: 0.65rem 1rem;
+}
+
+.menu-rounded .menu-link {
+    border-radius: 0.65rem;
+}
+.badge-light-success {
+    color: #50cd89;
+    background-color: #e8fff3;
+    font-size: 11px;
+}
+.user-drop-name{
+    font-size: 15px;
+}
+.usr-email{
+    font-size: 12px;
+}
+.badge {
+    display: inline-flex;
+    align-items: center;
+}
+.usr-email{
+    text-decoration: none;
+}
+.menu-gray-600 .menu-item .menu-link {
+    color: #7e8299;
+}
+.fw-bolder {
+    font-weight: 700 !important;
+}
+.menu-item .menu-link {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    flex: 0 0 100%;
+    padding: 0.65rem 1rem;
+    transition: none;
+    outline: none !important;
+    font-size: 14px;
+    text-decoration: none;
+    color:  #3f4254;
+    font-weight: bold;
+}
+
+  

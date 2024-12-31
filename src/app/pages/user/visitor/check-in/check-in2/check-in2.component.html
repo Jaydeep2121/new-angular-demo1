@@ -1,0 +1,105 @@
+<div>
+    <div class="text-end">
+        <div>
+            <span *ngFor="let person of unPlannedList" (click)="openCheckNotificationModal(checkNofitication,person.isUnplannedAccepted,person.inviteId)" 
+                  [ngClass]="{ 'text-success': person.isUnplannedAccepted, 'text-danger': !person.isUnplannedAccepted }">
+              {{ person.firstName }} {{ person.lastName }}<br>
+            </span>
+          </div>          
+    </div>
+
+    <app-back-button
+      (onClick)="onBackClickEmit($event)"
+      [text]="'Visitor Details'"
+     ></app-back-button>
+
+    
+    <div class="stepper stepper-links d-flex w-100 m-0 align-items-center justify-content-center" id="kt_create_account_stepper">
+        <div class="stepper-nav m-0 w-50 d-flex align-items-center my-3">
+            <div class="stepper-item ms-auto m-0 d-flex align-items-center">
+                <i class="fa fa-circle text-dark fs-1 m-0"></i>
+            </div>
+            <hr class="stepper-rule mx-0">
+            <div class="stepper-item me-auto m-0 d-flex align-items-center">
+                <i class="fa fa-circle text-dark fs-1 m-0"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="timeline-label"> -->
+        <!-- <div class="timeline-badge"> -->
+            <!-- <i class="fa fa-genderless text-warning fs-1"></i> -->
+            <!-- <hr class="timeline-rule">F -->
+            <!-- <i class="fa fa-genderless text-warning fs-1"></i> -->
+            <!-- <div class="timeline-badge">
+               
+            </div> -->
+        <!-- </div> -->
+    <!-- </div> -->
+    
+    <div class="d-flex justify-content-center align-items-center" [class.camera-img]="!checkIfNavigate" *ngIf="!receivedData.isNext">
+        <div class="symbol symbol-80px symbol-circle card-color p-12" style="position: relative;">
+            <i class="fa fa-camera text-gray-900" for="file" (click)="fileInput.click()" style="cursor: pointer; font-size:36px"></i>
+            <div>
+              <input #fileInput type="file" accept=".png, .jpg, .jpeg" (change)="onFileChange($event)" (blur)="touched = true"
+                     class="form-control input-file" name="file" id="file"/>
+            </div>
+            <!-- Display selected image -->
+            <img *ngIf="selectedImage" [src]="selectedImage" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" />
+          </div>          
+    </div>
+    <div class="d-flex justify-content-center align-items-center" *ngIf="!receivedData.isNext">
+        <button type="button" class="w-50 btn add-data-btn card-color btn-outline-secondary border border-none fw-bold " [disabled]="!selectedFile" (click)="createNewVisitor()">Add</button>
+    </div>
+    <div class="image-validation text-center">
+        <small>{{ selectedFile?.name }}</small><br><br>
+        <small *ngIf="touched && !this.selectedFile" class="error-text">*File is required</small>
+        <small *ngIf="errorText" class="error-text">*Please choose a PNG or JPG or JPEG file.</small>
+    </div>
+
+    <button *ngIf="checkIfNavigate" type="button" class="w-100 btn fetch-button card-color btn-outline-secondary border border-none mb-5 fw-bold my-8">Fetch
+        Photo</button>
+        <div class="my-10 card card-color px-6 rounded-2 mb-7 d-flex flex-column align-items-center justify-content-around card-wrapper" style="padding-bottom: 15px;">
+            <div class="symbol symbol-75px symbol-circle">
+                <!-- <ng-container>
+                  <img alt="Pic" [src]="'./assets/media/svg/avatars/blank.svg'" />
+                </ng-container> -->
+            </div>
+            <div class="d-flex justify-content-start flex-column w-100 fw-bold ps-3">
+                <span>Name   : {{receivedData?.firstName}}</span><br>
+                <span>Email  : {{receivedData?.email}}</span><br>
+                <span>Mobile : {{receivedData?.phoneNumber}}</span><br>
+                <span>Whom To meet : {{receivedData?.WhomMeet.text}}</span>
+            </div>
+    
+            <!-- <div class="bg-white rounded-5 py-15 px-3 rounded-2" >
+                <span class="fw-bold"> QR Code Sample</span>
+            </div> -->
+        </div>
+
+        <button type="button" class="w-100 btn checkin-btn card-color btn-outline-secondary border border-none mb-5 fw-bold my-8" (click)="checkInClick()">Check In</button>
+
+</div>
+
+<ng-template #checkNofitication let-modal>
+    <div class="modal-header">
+      <div class="header-text">
+        <h4 class="modal-title fw-bold my-auto">Visitor Notifier</h4>
+      </div>
+      <button
+        type="button"
+        class="btn btn-icon form-close-button"
+        aria-label="Close"
+        (click)="modal.close('Close click')"
+      ><i class="ki-outline ki-cross-circle text-gray-700" style="font-size: 22px;"></i>
+      </button>
+    </div>
+      <div class="modal-body">
+        <app-notification-body
+            (onOKClick)="sendInviteId()"
+            (onCancelClick)="closeModal()"
+            [notificationMsg]="notificationMsg"
+        >
+        </app-notification-body>
+      </div>
+  </ng-template>

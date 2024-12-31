@@ -1,0 +1,80 @@
+:host {
+  height: 100%;
+  margin: 0;
+
+  .flex-root {
+    height: 100%;
+  }
+}
+.root-layout{
+  background-color: #f9fafb;
+}
+.page-loaded {
+  app-layout {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+  }
+}
+/* For screens up to 425px */
+@media only screen and (max-width: 425px) {
+  .wrapper {
+      padding-top: 50px;
+  }
+}
+
+/* For screens between 426px and 375px */
+@media only screen and (min-width: 300px) and (max-width: 768px) {
+  .wrapper {
+      padding-top: 0px;
+  }
+}
+
+/* For screens between 769px and 1024px */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .wrapper {
+      padding-top: 0px;
+  }
+}
+
+/* For screens between 1025px and 1440px */
+@media only screen and (min-width: 1025px) and (max-width: 1440px) {
+  .wrapper {
+      padding-top: 50px;
+  }
+}
+
+/* For screens between 1441px and 2559px */
+@media only screen and (min-width: 1441px) and (max-width: 2559px) {
+  .wrapper {
+      padding-top: 50px;
+  }
+}
+
+.flex-row-fluid {
+    flex: 1 auto;
+    min-width: 0;
+}
+.flex-column {
+    flex-direction: column !important;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.align-items-stretch {
+  align-items: stretch !important;
+}
+
+// .content {
+//   padding: 25px 0 0 0;
+// }
+
+.container-xxl{
+  width: 100%;
+  max-width: 1320px;
+  margin-right: auto;
+  margin-left: auto;
+}

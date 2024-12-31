@@ -1,0 +1,14 @@
+<div class="d-flex flex-column flex-root root-layout">
+  <div class="page d-flex flex-row flex-column-fluid">
+    <div class="wrapper d-flex flex-column flex-row-fluid" [ngStyle]="{ 'padding-left': isSmallScreen ? '0' : '350px' }">
+      <app-header
+        class="header align-items-stretch"
+      ></app-header>
+      <div class="content d-flex flex-column flex-column-fluid">
+        <app-content
+          class="flex-column-fluid align-items-start container-xxl"
+        ></app-content>
+      </div>
+    </div>
+  </div>
+</div>

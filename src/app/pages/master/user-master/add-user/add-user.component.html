@@ -1,0 +1,123 @@
+<div class="collapse show">
+    <form novalidate class="form" [formGroup]="userForm">
+        <div class="card-body p-2">
+          <div class="row mb-6">
+            <div class="col-lg-6 fv-row">
+              <input type="text" class="
+                  form-control form-control-lg form-control-solid
+                  mb-3 mb-lg-0
+                "
+                placeholder="First name"
+                formControlName="firstName"
+              />
+              <span class="error-text"
+                  *ngIf="isControlInvalidWrapper('firstName')">
+                  *FirstName is required
+              </span>
+            </div>
+            <div class="col-lg-6 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                placeholder="Last name"
+                formControlName="lastName"
+              />
+              <span class="error-text"
+                  *ngIf="isControlInvalidWrapper('lastName')">
+                  *LastName is required
+              </span>
+            </div>
+          </div>
+          <div class="row mb-6">
+            <div class="col-lg-6 fv-row">
+              <input type="text" class="form-control form-control-lg form-control-solid" placeholder="User name" formControlName="userName">
+              <!-- <span class="text-danger"
+                *ngIf="userForm.get('userName')?.hasError('userName') && isControlInvalidWrapper('userName')">
+                *Please enter a valid email
+              </span> -->
+              <span class="error-text"
+                *ngIf="isControlInvalidWrapper('userName')">
+                *UserName is required
+              </span>
+            </div>
+            <div class="col-lg-6 fv-row">
+              <input
+                type="password"
+                class="form-control form-control-lg form-control-solid"
+                placeholder="Password"
+                formControlName="password"
+              />
+              <span class="error-text"
+                  *ngIf="isControlInvalidWrapper('password')">
+                  *Password is required
+              </span>
+            </div>
+          </div>
+          <div class="row mb-6" *ngIf="userType==='master'">
+            <div class="col-lg-6 fv-row">
+              <ng-select formControlName="school" [items]="schoolList" bindLabel="name" placeholder="Select a School" class="ng-class">
+                <ng-template ng-label-tmp let-item="item">
+                  {{ item.name }}
+                </ng-template>
+              </ng-select>
+              <span class="error-text" *ngIf="isControlInvalidWrapper('school')">
+                *Please select school
+              </span>
+            </div>
+            <div class="col-lg-6 fv-row">
+              <!-- <ng-select formControlName="site" [items]="siteList" bindLabel="name" placeholder="Select a Site" class="ng-class">
+                <ng-template ng-label-tmp let-item="item">
+                  {{ item.name }}
+                </ng-template>
+              </ng-select>
+              <span class="error-text" *ngIf="isControlInvalidWrapper('site')">
+                *Please select site
+              </span> -->
+              <ng-select formControlName="site" [items]="siteList" [bindLabel]="'text'" [bindValue]="'value'"
+                    placeholder="Select a site" [clearSearchOnAdd]="true" [closeOnSelect]="false" class="multiple-select" [multiple]="true"  clearAllText="Clear" [compareWith]="compareFn" >
+                    <ng-template ng-header-tmp class="visiter-drop">
+                        <button (click)="selectAll('site')" class="btn selection-btn btn-sm btn-secondary me-2">Select all</button>      
+                        <button (click)="unselectAll('site')" class="btn selection-btn btn-sm btn-secondary">Unselect all</button>
+                      </ng-template>
+                      <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <div class="check-box">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"  [ngModelOptions]="{standalone: true}"/>
+                            {{ item.text }}
+                        </div>
+                    </ng-template>
+                    <ng-template ng-multi-label-tmp let-items="items">
+                        <div *ngFor="let item of items; let i = index">
+                          <div class="ng-value" *ngIf="i < 1">
+                            {{ item.text }}
+                          </div>
+                        </div>
+                        <div class="ng-value" *ngIf="items.length > 1">
+                          <span class="ng-value-label">{{items.length - 1}} more...</span>
+                        </div>
+                      </ng-template>
+                </ng-select>
+                <span class="error-text" *ngIf="isControlInvalidWrapper('site')">
+                    *Please select site
+                </span>
+            </div>
+          </div>
+          <div class="text-center mb-3">
+              <span class="text-danger" *ngIf="errorMessage">
+                {{errorMessage}}
+              </span>
+              <span class="text-success" *ngIf="successMessage">
+                {{successMessage}}
+              </span>
+          </div>
+          <div class="card-footer d-flex justify-content-center align-items-center  w-100">
+              <button type="button" class="btn btn-outline-secondary border border-secondary cancel-btn"
+                  (click)="onCancelClick()" [disabled]="(isLoading$ | async)">Cancel</button>
+              <button [disabled]="!userForm.valid  || (isLoading$ | async)" (click)="submit()" type="button"
+                  class="btn btn-light-primary ms-2 submit-btn">
+                  <span *ngIf="!(isLoading$ | async)">Add</span>
+                  <span *ngIf="isLoading$ | async" class="spinner-border spinner-border-sm align-middle ms-2"></span>
+              </button>
+          </div>
+        </div>
+    </form>
+</div>

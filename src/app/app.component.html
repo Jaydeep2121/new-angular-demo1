@@ -1,0 +1,22 @@
+<!-- <div class="section" >
+  <app-header [menuStatus]="menuStatus" (menuActiveStatus)="receiveMenuStatus($event)" (appActiveStatus)="receiveAppStatus($event)"></app-header>
+  <div class="contentSection">
+      <app-side-nav [menuStatus]="menuStatus" [selectedApp]="selectedApp" (menuActiveStatus)="receiveMenuStatus($event)"></app-side-nav>
+      <div [class]="userDetail ? menuStatus ? 'content active' : 'content' : 'content'">
+          <div class="headerSection">
+              <app-breadcrumb-list></app-breadcrumb-list>
+          </div>
+          <router-outlet></router-outlet>
+      </div>
+  </div>
+</div>
+
+<ng-template #loader>
+  <app-no-data class="authLoader" [loaderStatus]="true" [loaderText]="'Checking user credentials, please wait...'"></app-no-data>
+</ng-template>
+
+<ng-template #menuAccessloader>
+  <app-no-data class="authLoader" [loaderStatus]="true" [loaderText]="'Checking user menu access, please wait...'"></app-no-data>
+</ng-template> -->
+
+<router-outlet></router-outlet>

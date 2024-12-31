@@ -1,0 +1,126 @@
+<div class="card mb-5 mb-xl-8 table-outer">
+    <div class="card-header border-0 pt-5">
+        <div class="col-md-6">
+            <div class="d-flex justify-content-between align-items-center">
+                <form class="flex-grow-1">
+                  <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0">
+                      <img src="./assets/media/icons/duotune/general/gen021.svg" class="search-icon" alt="Search Icon">
+                    </span>
+                    <input type="text" class="form-control border-start-0" [(ngModel)]="searchTerm" name="search"
+                      placeholder="Search..." (input)="applyFilter()">
+                  </div>
+                </form>
+                <button type="button" class="btn filter-icon btn-icon btn-color-gray-700 btn-active-light-primary btn-outline btn-custom w-40px h-40px ms-1 ms-lg-3">
+                  <i class="ki-outline ki-filter text-gray-700" style="font-size: 25px;"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex justify-content-end">
+          <div class="card-toolbar">
+            <button type="button" class="btn btn-sm btn-light-primary" (click)="openAddWatchListModal(addInvites)">
+              <span [inlineSVG]="'./assets/media/icons/duotune/arrows/arr075.svg'" class="svg-icon svg-icon-3"></span>
+              Add Multiple Invites 
+            </button>
+          </div>
+        </div>
+    </div>
+    <div class="card-body py-3 table-responsive">
+        <!-- begin::Table container -->
+        <div class="table table-responsive">
+            <!-- begin::Table -->
+            <table class="table align-middle gs-0 gy-4">
+                <!-- Table head -->
+                <thead>
+                    <tr class="fw-bolder text-muted bg-light">
+                        <th class="ps-4 min-w-200px rounded-start">Name</th>
+                        <th class="min-w-200px">Location</th>
+                        <th class="min-w-200px">Host</th>
+                        <th class="min-w-250px">CheckIn</th>
+                        <th class="min-w-250px">CheckOut</th>
+                        <th class="min-w-200px">Comment</th>
+                        <th class="min-w-100px">Purpose</th>
+                        <th class="min-w-100px">Sub Type</th>
+                    </tr>
+                </thead>
+                <!-- Table body -->
+                <tbody>
+                  <ng-container *ngIf="showLoading || !!noDataFound">
+                    <tr *ngIf="showLoading">
+                      <td [attr.colspan]="pageStyle.length">
+                        <app-loader [tableStyles]="pageStyle"></app-loader>
+                      </td>
+                    </tr>
+                    <tr *ngIf="!!noDataFound">
+                      <td [attr.colspan]="pageStyle.length">
+                        <div>
+                          <span class="fw-bolder">{{noDataFound}}</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <ng-container *ngIf="filteredData?.length">
+                    <tr *ngFor="let row of filteredData">
+                        <td class="symbol symbol-30px me-5">
+                            <img src="./assets/media/svg/avatars/blank.svg" alt="" class="me-2" />
+                            <span>{{row.name}}</span>
+                        </td>
+                        <td>{{ row.location }}</td>
+                        <td>{{ row.hostName}}</td>
+                        <td>{{ row.expectedCheckinTime | date: 'dd MMM, YYYY, hh:mm a' }}</td>
+                        <td>{{ row.expectedCheckoutTime| date: 'dd MMM, YYYY, hh:mm a'  }}</td>
+                        <td>
+                          <div class="text-wrap-cell">{{ row.comment }}</div>
+                        </td>
+                        <td>{{ row.purpose }}</td>
+                        <td>{{ row.subType }}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+            </table>
+            <!-- end::Table -->
+        </div>
+        <!-- end::Table container -->
+
+        <!-- Additional Pagination Section -->
+        <div class="d-flex justify-content-between flex-stack flex-wrap pt-10 align-items-center"  *ngIf="!noDataFound">
+            <div class="fs-6 fw-bold text-gray-700 me-3">Showing {{ getFirstIndex() }} to {{ getLastIndex() }} of {{ filteredData.length*totalPages }} entries</div>
+            <ul class="pagination mb-0">
+              <li class="page-item previous me-2">
+                <button class="nav-button page-link cursor-pointer" (click)="prevPage()" [disabled]="currentPage === 1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                  </svg>
+                </button>
+              </li>
+              <li class="page-item" *ngFor="let page of getPages()">
+                <button class="page-link cursor-pointer" (click)="goToPage(page)" [class.active]="currentPage === page">{{ page }}</button>
+              </li>
+              <li class="page-item next ms-2">
+                <button class="nav-button page-link cursor-pointer" (click)="nextPage()" [disabled]="currentPage === totalPages">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </div>
+    </div>
+</div>
+<ng-template #addInvites let-modal>
+  <div class="modal-header">
+    <div class="header-text">
+      <h4 class="modal-title ps-4 fw-bold my-auto">Add Multiple Invite</h4>
+    </div>
+    <button
+      type="button"
+      class="btn btn-icon form-close-button"
+      aria-label="Close"
+      (click)="modal.close('Close click')"
+    ><i class="ki-outline ki-cross-circle text-gray-700" style="font-size: 22px;"></i>
+    </button>
+  </div>
+    <div class="modal-body">
+      <app-add-multiple-invites [hostlistData]="hostlist" [subTypeList]="subTypeList" (onClick)="onSave($event)"></app-add-multiple-invites>
+    </div>
+</ng-template>

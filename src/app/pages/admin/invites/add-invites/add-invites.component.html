@@ -1,0 +1,250 @@
+<div class="collapse show">
+    <form novalidate class="form" [formGroup]="InvitesForm">
+        <div class="card-body p-2">
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6 fv-row">
+                            <ng-select formControlName="visitor" [items]="visiterList" bindLabel="fullName"
+                                bindValue="visitorId" placeholder="Select a visitor"
+                                (ngModelChange)="onVisitorChange($event)">
+                                <ng-template ng-label-tmp let-item="item">
+                                    {{ item.fullName }}
+                                </ng-template>
+                            </ng-select>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('visitor')">
+                                *Please select visitor
+                            </span>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <input type="text" class="form-control form-control-lg form-control-solid"
+                                placeholder="Name" formControlName="name" />
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('name')">*Name
+                                required</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Address -->
+            <div class="row mb-6">
+                <div [ngClass]="{'col-lg-12 fv-row': !userInvites}">
+                    <input type="text" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                        placeholder="Address" formControlName="address" [class.user-input-txtbox]="userInvites" />
+                    <span class="error-text" *ngIf="isControlInvalidWrapper('address')">*Address is required</span>
+                </div>
+            </div>
+            <!-- Country & state -->
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6 fv-row">
+                            <ng-select formControlName="country" [items]="countryList" bindLabel="name"
+                                placeholder="Select a Country">
+                                <ng-template ng-label-tmp let-item="item">
+                                    {{ item.name }}
+                                </ng-template>
+                            </ng-select>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('country')">
+                                *Please select country
+                            </span>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <ng-select formControlName="state" [items]="stateList" bindLabel="name"
+                                placeholder="Select a State">
+                                <ng-template ng-label-tmp let-item="item">
+                                    {{ item.name }}
+                                </ng-template>
+                            </ng-select>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('state')">
+                                *Please select state
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- City & mobile-->
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6 fv-row">
+                            <ng-select formControlName="city" [items]="citiesList" bindLabel="name"
+                                placeholder="Select a City">
+                                <ng-template ng-label-tmp let-item="item">
+                                    {{ item.name }}
+                                </ng-template>
+                            </ng-select>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('city')">
+                                *Please select city
+                            </span>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <input type="text" class="form-control form-control-lg form-control-solid"
+                                placeholder="Mobile" formControlName="Phone" />
+                            <span class="error-text" *ngIf="InvitesForm.get('Phone')?.errors?.['pattern']">
+                                *Please enter a valid Mobile number
+                            </span>
+                            <span class="error-text"
+                                *ngIf="isControlInvalidWrapper('Phone') && !InvitesForm.get('Phone')?.errors?.['pattern']">*Mobile
+                                is
+                                required</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Host & Location -->
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6 fv-row">
+
+                            <ng-select formControlName="host" [items]="hostlist" bindLabel="text" bindValue="value" placeholder="Select a Host" class="ng-class">
+                                <ng-template ng-label-tmp let-item="item">
+                                    {{ item.text }}
+                                </ng-template>
+                            </ng-select>
+                            
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('host')">
+                                *Please select host
+                            </span>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <input type="text" class="form-control form-control-lg form-control-solid"
+                                placeholder="Location" formControlName="location" />
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('location')">*Location is
+                                required</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Purpose"
+                        formControlName="purpose" />
+                    <span class="error-text" *ngIf="isControlInvalidWrapper('purpose')">*Purpose is
+                        required</span>
+                </div>
+            </div>
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <input type="text" class="form-control form-control-lg form-control-solid" placeholder="On premises"
+                    formControlName="premises" />
+                    <span class="error-text" *ngIf="isControlInvalidWrapper('premises')">*Premises is
+                        required</span>
+                </div>
+            </div>
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6 fv-row relative-position">
+                            <div class="position-relative">
+                                <input
+                                    class="form-control form-control-lg form-control-solid"
+                                    formControlName="expectedCheckInDateTime"
+                                    [owlDateTime]="chekIndt"
+                                    placeholder="Ex Check In"
+                                />
+                                <i class="ki-outline ki-calendar-add text-gray-700 fs-2tx calendar-icon" [owlDateTimeTrigger]="chekIndt"></i>
+                                <owl-date-time #chekIndt></owl-date-time>
+                            </div>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('expectedCheckInDateTime')">
+                                *Checkin Time is required
+                            </span>
+                        </div>
+                        <div class="col-lg-6 fv-row relative-position">
+                            <div class="position-relative">
+                                <input
+                                    class="form-control form-control-lg form-control-solid"
+                                    formControlName="expectedCheckOutDateTime"
+                                    [owlDateTime]="chekOutdt"
+                                    placeholder="Ex Check Out"
+                                />
+                                <i class="ki-outline ki-calendar-add text-gray-700 fs-2tx calendar-icon" [owlDateTimeTrigger]="chekOutdt"></i>
+                                <owl-date-time #chekOutdt></owl-date-time>
+                            </div>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('expectedCheckOutDateTime')">
+                                *Checkout Time is required
+                            </span>
+                        </div>
+                    </div>
+                    <span class="error-text" *ngIf="InvitesForm.hasError('dateTimeMismatch')">
+                        *Checkin Time should be earlier than Checkout Time
+                    </span>
+                </div>
+            </div>
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6 fv-row relative-position">
+                            <div class="position-relative">
+                                <input
+                                    class="form-control form-control-lg form-control-solid"
+                                    [min]="minDate"
+                                    formControlName="inviteDateTime"
+                                    [owlDateTime]="invDate"
+                                    placeholder="Invite Date"
+                                />
+                                <i class="ki-outline ki-calendar-add text-gray-700 fs-2tx calendar-icon" [owlDateTimeTrigger]="invDate"></i>
+                                <owl-date-time #invDate></owl-date-time>
+                            </div>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('inviteDateTime')">
+                                *Invite-date is required
+                            </span>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <ng-select  formControlName="visitertype" [items]="visitertypedata" bindLabel="text" bindValue="value"
+                                placeholder="Select a Visitor type" class="ng-class" (change)="handalevisitertype()">
+                                <ng-template ng-label-tmp let-item="item" >
+                                    {{ item.text }}
+                                </ng-template>
+                            </ng-select>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('visitertype')">
+                                *Please select visitertype
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div  class=" mb-6" *ngIf="isParent">
+                <div class="col-lg-6 fv-row">
+                    <ng-select formControlName="subtypedata" [items]="subtypedata" bindLabel="text" bindValue="value"
+                        placeholder="Select a Parent" class="ng-class">
+                        <ng-template ng-label-tmp let-item="item">
+                            {{ item.text }}
+                        </ng-template>
+                    </ng-select>
+                    <span class="error-text" *ngIf="isControlInvalidWrapper('subtypedata')">
+                        *Please select data
+                    </span>
+                </div>
+            </div>
+            <div class="row mb-6">
+                <div class="col-lg-12 fv-row">
+                    <textarea #messageInput
+                        class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 resize-none" rows="2"
+                        data-kt-element="input" placeholder="Add Remarks" formControlName="remarks"></textarea>
+                    <span class="error-text" *ngIf="isControlInvalidWrapper('remarks')">
+                        *Remarks is required
+                    </span>
+                </div>
+            </div>
+            <div *ngIf="isstatus" style="color: red;">errors.status</div>
+        </div>
+        <div class="text-center mb-3">
+            <span class="text-danger" *ngIf="errorMessage">
+              {{errorMessage}}
+            </span>
+            <span class="text-success" *ngIf="successText">
+              {{successText}}
+           </span>
+          </div>
+        <div class="card-footer d-flex justify-content-center align-items-center w-100">
+            <button type="button" class="btn btn-outline-secondary border border-secondary w-25 cancel-btn"
+                (click)="closeModal()" [disabled]="isstatus || (isLoading$ | async)">Cancel</button>
+            <button [disabled]="!InvitesForm.valid || isstatus" (click)="submitForm()" type="button"
+                class="btn btn-light-primary ms-2 w-25 submit-btn">
+                <span *ngIf="!(isLoading$ | async)">{{isEdit ? 'Edit' : 'Add'}}</span>
+                <span *ngIf="isLoading$ | async" class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </button>
+        </div>
+    </form>
+</div>

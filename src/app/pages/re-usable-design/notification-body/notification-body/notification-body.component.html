@@ -1,0 +1,11 @@
+<div class="visit-type">
+    <div class="visitor-notification mb-3">
+        {{notificationMsg}}
+    </div>
+    <div class="visitor-action">   
+        <div class="card-footer d-flex justify-content-center align-items-center  w-100">
+            <button type="button" class="btn btn-outline-secondary border border-secondary cancel-btn" (click)="onOkOrCancel('cancle')">Cancel</button>
+            <button type="button" (click)="onOkOrCancel('ok')" class="btn btn-light-primary ms-2 submit-btn">OK</button>
+        </div>
+    </div>
+</div>

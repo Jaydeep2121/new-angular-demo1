@@ -1,0 +1,36 @@
+.icon-size {
+ font-size: 24px;
+}
+.menu-item .menu-link {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    flex: 0 0 100%;
+    padding: 0.65rem 1rem;
+    transition: none;
+    outline: none !important;
+}
+.menu-item .menu-link .menu-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    margin-right: 0.5rem;
+}
+.fw-bold {
+    font-weight: 600; 
+}
+a {
+    text-decoration: none;
+}
+.menu-rounded .menu-link {
+    border-radius: 0.65rem;
+}
+.menu-item .menu-link .menu-title {
+    color: #5e6278 !important;
+}
+.text-gray-700 {
+    color: #5e6278 !important;
+}

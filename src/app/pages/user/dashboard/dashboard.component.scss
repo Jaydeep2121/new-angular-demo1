@@ -1,0 +1,58 @@
+.custom-header {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+}
+
+.custom-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 60%;
+    background-color: #F0F0F0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px;
+}
+
+.custom-logo span {
+    font-weight: bold;
+}
+
+.custom-name {
+    padding: 14px;
+    font-weight: bold;
+    background-color: #F0F0F0; 
+    border-radius: 3px;
+}
+
+.card-illustration {
+    margin-top: 10px;
+    margin-bottom: 7px;
+    padding: 8px 24px;
+    height: 300px;
+    border-radius: 15px;
+    background-color: #F0F0F0;
+    border: none;
+  }
+  
+  .card-illustration span {
+    font-weight: bold;
+    font-size: 1.25rem; 
+    margin: auto;
+  }
+  .margin-horizontal-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+ .btn:hover {
+    background-color:#e1e3ea;
+    color: #000;
+}
+.btn-color {
+   background-color: #F0F0F0;
+   border: none;
+}
+.sticky-bottom {
+    margin-top: 30px;
+}

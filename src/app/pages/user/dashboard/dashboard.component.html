@@ -1,0 +1,57 @@
+<div class="mb-4 mb-xl-8 p-2 h-100 d-flex flex-column  margin-horizontal-auto">
+    <div class="text-end">
+        <div>
+            <span *ngFor="let person of unPlannedList" (click)="openCheckNotificationModal(checkNofitication,person.isUnplannedAccepted,person.inviteId)" 
+                  [ngClass]="{ 'text-success': person.isUnplannedAccepted, 'text-danger': !person.isUnplannedAccepted }">
+              {{ person.firstName }} {{ person.lastName }}<br>
+            </span>
+          </div>          
+    </div>
+    <div class="w-100 d-flex justify-content-between align-items-center mb-3 ">
+        <div class="custom-logo">
+            <span class="fw-bold">logo</span>
+        </div>
+        <div class="custom-name">
+            {{userInfo.value.userID}}
+        </div>
+    </div>
+    <div style="font-size: 21px;" class="fw-bold my-8">Welcome to the......</div>
+    <div class="my-5 w-100 d-flex justify-content-between ">
+        <button (click)="checkInClick()" type="button" class="btn btn-outline-secondary border border-secondary flex-grow-1 me-2 fw-bold">Check
+            In</button>
+        <button (click)="checkOutClick()" type="button" class="btn btn-outline-secondary border border-secondary flex-grow-1 ms-2 fw-bold">Check
+            Out</button>
+    </div>
+
+
+    <div class="my-10 card card-illustration">
+        <span class="fw-bold">illustration</span>
+      </div>
+      
+    <div class="w-100 d-flex flex-column sticky-bottom ">
+        <button class="btn card-color btn-outline-secondary btn-color mb-3 fw-bold border-none"  (click)="navigateBtn(true)">I have pre Registration</button>
+        <button class="btn card-color btn-outline-secondary btn-color fw-bold border-none" (click)="navigateBtn(false)">Register & Check In</button>
+    </div>
+</div>
+<ng-template #checkNofitication let-modal>
+    <div class="modal-header">
+      <div class="header-text">
+        <h4 class="modal-title fw-bold my-auto">Visitor Notifier</h4>
+      </div>
+      <button
+        type="button"
+        class="btn btn-icon form-close-button"
+        aria-label="Close"
+        (click)="modal.close('Close click')"
+      ><i class="ki-outline ki-cross-circle text-gray-700" style="font-size: 22px;"></i>
+      </button>
+    </div>
+      <div class="modal-body">
+        <app-notification-body
+            (onOKClick)="sendInviteId()"
+            (onCancelClick)="closeModal()"
+            [notificationMsg]="notificationMsg"
+        >
+        </app-notification-body>
+      </div>
+  </ng-template>

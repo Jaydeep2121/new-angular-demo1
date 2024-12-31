@@ -1,0 +1,92 @@
+<div class="card mb-5 mb-xl-8 table-outer">
+  <form novalidate class="form mt-3 mb-3" [formGroup]="InvitesForm">
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-5 fv-row relative-position">
+          <div class="position-relative">
+            <input class="form-control form-control-lg form-control-solid" formControlName="expectedCheckInDateTime"
+              [owlDateTime]="chekIndt" placeholder="From Date" />
+            <i class="ki-outline ki-calendar-add text-gray-700 fs-2tx calendar-icon"
+              [owlDateTimeTrigger]="chekIndt"></i>
+            <owl-date-time [pickerType]="'calendar'" #chekIndt></owl-date-time>
+          </div>
+          <span class="error-text"
+            *ngIf="InvitesForm.get('expectedCheckInDateTime').touched && InvitesForm.get('expectedCheckInDateTime').errors?.['required']">
+            *From Date is required
+          </span>
+        </div>
+        <div class="col-lg-5 fv-row relative-position">
+          <div class="position-relative">
+            <input class="form-control form-control-lg form-control-solid" formControlName="expectedCheckOutDateTime"
+              [owlDateTime]="chekOutdt" placeholder="To Date" />
+            <i class="ki-outline ki-calendar-add text-gray-700 fs-2tx calendar-icon"
+              [owlDateTimeTrigger]="chekOutdt"></i>
+            <owl-date-time [pickerType]="'calendar'" #chekOutdt></owl-date-time>
+          </div>
+          <span class="error-text"
+            *ngIf="InvitesForm.get('expectedCheckOutDateTime').touched && InvitesForm.get('expectedCheckOutDateTime').errors?.['required']">
+            *To Date is required
+          </span>
+        </div>
+        <button class="col-lg-2 btn btn-sm btn-primary" [disabled]="!InvitesForm.valid || (isLoading$ | async)" (click)="onGo()">
+          <span *ngIf="!(isLoading$ | async)">Go</span>
+          <span *ngIf="isLoading$ | async" class="spinner-border spinner-border-sm align-middle ms-2"></span>
+        </button>
+      </div>
+      <span class="error-text" *ngIf="InvitesForm.hasError('dateTimeMismatch')">
+        *FromDate should be earlier than ToDate
+      </span>
+    </div>
+  </form>
+  <!-- <div class="card-header border-0 pt-5">
+  </div> -->
+  <!-- *ngIf="isshowtabledata" -->
+  <div *ngIf="ReportsData && ReportsData.length > 0" class="table table-responsive">
+  <div *ngIf="isshowtabledata" class="card-body py-3 table-responsive">
+      <table class="table align-middle gs-0 gy-4">
+        <thead>
+          <tr class="fw-bolder text-muted bg-light">
+            <th class="ps-4 min-w-200px rounded-start">Name</th>
+            <th class="min-w-200px">Phone Number</th>
+            <th class="min-w-200px">Check in time</th>
+            <th class="min-w-200px">Check out time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of ReportsData; index as i">
+            <td class="symbol symbol-30px me-5">
+              <img src="../../../../assets/media/svg/avatars/blank.svg" alt="" class="me-2" />
+              <span>{{row.name}}</span>
+            </td>
+            <td>{{row.phoneNumber}}</td>
+            <td>{{ row.checkInTime | date: 'dd MMM, yyyy, hh:mm a' }}</td>
+            <td>{{ row.checkOutTime | date: 'dd MMM, yyyy, hh:mm a' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- <div *ngIf="isshowtabledata"  class="d-flex justify-content-between flex-stack flex-wrap pt-10 align-items-center">
+        <div class="fs-6 fw-bold text-gray-700 me-3">Showing Showing {{ getFirstIndex() }} to {{ getLastIndex() }} of {{ filteredData.length*totalPages }} entries</div>
+        <ul class="pagination mb-0">
+          <li class="page-item previous me-2">
+            <button class="nav-button page-link cursor-pointer" (click)="prevPage()" [disabled]="currentPage === 1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+              </svg>
+            </button>
+          </li>
+          <li class="page-item" *ngFor="let page of getPages()">
+            <button class="page-link cursor-pointer" (click)="goToPage(page)" [class.active]="currentPage === page">{{ page }}</button>
+          </li>
+          <li class="page-item next ms-2">
+            <button class="nav-button page-link cursor-pointer" (click)="nextPage()" [disabled]="currentPage === totalPages">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </div> -->
+</div>

@@ -1,0 +1,112 @@
+<div class="card mb-5 mb-xl-8 table-outer">
+    <div class="card-header border-0 pt-5">
+        <div class="col-md-6">
+            <div class="d-flex justify-content-between align-items-center">
+                <form class="flex-grow-1">
+                  <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0">
+                      <img src="./assets/media/icons/duotune/general/gen021.svg" class="search-icon" alt="Search Icon">
+                    </span>
+                    <input type="text" class="form-control border-start-0" [(ngModel)]="searchTerm" name="search"
+                      placeholder="Search..." (input)="applyFilter()">
+                  </div>
+                </form>
+                <button type="button" class="btn filter-icon btn-icon btn-color-gray-700 btn-active-light-primary btn-outline btn-custom w-40px h-40px ms-1 ms-lg-3">
+                  <i class="ki-outline ki-filter text-gray-700" style="font-size: 25px;"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-3 d-flex justify-content-end">
+          <div class="card-toolbar">
+            <button type="button" class="btn btn-sm btn-light-primary"  (click)="openUserInfoModal(addUserInfo,false)">
+              <span [inlineSVG]="'./assets/media/icons/duotune/arrows/arr075.svg'" class="svg-icon svg-icon-3"></span>
+              Add UserInfo
+            </button>
+          </div>
+        </div>
+    </div>
+    <div class="card-body py-3 table-responsive">
+        <div class="table table-responsive">
+            <table class="table align-middle gs-0 gy-4">
+                <thead>
+                    <tr class="fw-bolder text-muted bg-light">
+                      <th class="ps-4 min-w-200px rounded-start">ID</th>
+                      <th class="min-w-200px">First Name</th>
+                      <th class="min-w-200px">Middle Name</th>
+                      <th class="min-w-200px">Last Name</th>
+                      <th class="min-w-200px">Mobile No</th>
+                      <th class="min-w-200px">Address</th>
+                      <th class="min-w-200px">City</th>
+                      <th class="min-w-200px">State</th>
+                      <th class="min-w-200px">Role</th>
+                      <th class="min-w-200px">Active</th>
+                      <th class="min-w-200px">Action</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                    <tr *ngFor="let row of filteredData">
+                      <td class="symbol symbol-30px me-5">
+                        <img [src]="row.image" alt="" class="me-2" />
+                        <span class="ms-2">{{row.id}}</span>
+                       </td>
+                      <td>{{ row.firstname }}</td>
+                      <td>{{ row.middlename }}</td>
+                      <td>{{ row.lastname }}</td>
+                      <td>{{ row.mobileNo }}</td>
+                      <td>{{ row.address }}</td>
+                      <td>{{ row.city }}</td>
+                      <td>{{ row.state }}</td>
+                      <td>{{ row.role }}</td>
+                      <td>{{ row.active }}</td>
+                      <td> 
+                        <button type="button" class="btn btn-sm" (click)="onEditform(addUserInfo,row)">
+                          <i class="ki-outline ki-notepad-edit text-gray-700 fs-2"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-between flex-stack flex-wrap pt-10 align-items-center">
+            <div class="fs-6 fw-bold text-gray-700 me-3">Showing {{ getFirstIndex() }} to {{ getLastIndex() }} of {{ dataSource.length }} entries</div>
+            <ul class="pagination mb-0">
+              <li class="page-item previous me-2">
+                <button class="nav-button page-link cursor-pointer" (click)="prevPage()" [disabled]="currentPage === 1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                  </svg>
+                </button>
+              </li>
+              <li class="page-item" *ngFor="let page of getPages()">
+                <button class="page-link cursor-pointer" (click)="goToPage(page)" [class.active]="currentPage === page">{{ page }}</button>
+              </li>
+              <li class="page-item next ms-2">
+                <button class="nav-button page-link cursor-pointer" (click)="nextPage()" [disabled]="currentPage === totalPages">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </div>
+    </div>
+</div>
+
+<ng-template #addUserInfo let-modal>
+  <div class="modal-header">
+    <div class="header-text">
+      <h4 class="modal-title ps-4 fw-bold my-auto">Add User</h4>
+    </div>
+    <button
+      type="button"
+      class="btn btn-icon form-close-button"
+      aria-label="Close"
+      (click)="modal.close('Close click')"
+    ><i class="ki-outline ki-cross-circle text-gray-700" style="font-size: 22px;"></i>
+    </button>
+  </div>
+    <div class="modal-body">
+      <app-add-user-info [data]="userInfoData"></app-add-user-info>
+    </div>
+</ng-template>

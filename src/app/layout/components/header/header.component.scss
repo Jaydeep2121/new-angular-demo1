@@ -1,0 +1,29 @@
+.flex-stack {
+    justify-content: space-between;
+    align-items: center;
+}
+.title-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 118px;
+    @media (max-width: 1808px) {
+        padding-left: 61px;
+    }
+    @media (max-width: 1691px) {
+        padding-left: 14px;
+    }
+}
+
+.title-container {
+    margin-bottom: 20px; 
+    @media (max-width: 910px) {
+        margin-bottom: 9px; 
+    }
+}

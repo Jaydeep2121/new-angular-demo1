@@ -1,0 +1,29 @@
+:host ::ng-deep .ng-select-container {
+    border: none !important;
+    background-color: #f8f8f8 !important;
+    min-height: 45px !important;
+}
+::ng-deep {
+    .cdk-overlay-container {
+      z-index: 1200;
+    }
+    .ng-select-container {
+      border: none !important;
+      background: #F8F8F8 !important;
+      min-height: 45px !important;
+      }    
+      .ng-input {
+        padding-top: 6px !important;
+      }
+      .multiple-select .ng-placeholder{
+        padding-top: 7px !important;
+      }
+
+      .multiple-select .ng-input{
+        padding-top: 4px !important;
+      }
+  }
+
+  .button-outline{
+    border-color: transparent !important;
+}

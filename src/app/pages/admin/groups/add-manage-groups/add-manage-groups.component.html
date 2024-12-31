@@ -1,0 +1,55 @@
+<div class="collapse show">
+    <form novalidate class="form" [formGroup]="GroupaForm">
+        <div class="card-body p-2 d-flex flex-column w-100">
+            <div class="mb-6 w-100" >
+                <input type="text" formControlName="section" placeholder="Enter Section" class="form-control form-control-lg form-control-solid" />
+                <span class="error-text" *ngIf="isControlInvalidWrapper('section')">
+                    *Please enter section
+                </span>
+            </div>
+            <div class="mb-6 w-100">
+                <ng-select formControlName="visitor" [items]="newlist" [bindLabel]="'text'" [bindValue]="'value'"
+                    placeholder="Select a visitor" [clearSearchOnAdd]="true" [closeOnSelect]="false" class="multiple-select" [multiple]="true"  clearAllText="Clear" [compareWith]="compareFn" >
+                    <ng-template ng-header-tmp class="visiter-drop">
+                        <button (click)="selectAll('visitor')" class="btn selection-btn btn-sm btn-secondary me-2">Select all</button>      
+                        <button (click)="unselectAll('visitor')" class="btn selection-btn btn-sm btn-secondary">Unselect all</button>
+                      </ng-template>
+                      <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <div class="check-box">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"  [ngModelOptions]="{standalone: true}"/>
+                            {{ item.text }}
+                        </div>
+                    </ng-template>
+                    <ng-template ng-multi-label-tmp let-items="items">
+                        <div *ngFor="let item of items; let i = index">
+                          <div class="ng-value" *ngIf="i < 1">
+                            {{ item.text }}
+                          </div>
+                        </div>
+                        <div class="ng-value" *ngIf="items.length > 1">
+                          <span class="ng-value-label">{{items.length - 1}} more...</span>
+                        </div>
+                      </ng-template>
+                </ng-select>
+                <span class="error-text" *ngIf="isControlInvalidWrapper('visitor')">
+                    *Please select visitor
+                </span>
+            </div>
+            <div class="text-center mb-3">
+                <span class="text-danger" *ngIf="errorMessage">
+                  {{errorMessage}}
+                </span>
+                <span class="text-success" *ngIf="successText">
+                  {{successText}}
+               </span>
+            </div>
+            <div class="card-footer d-flex justify-content-center align-items-center  w-100">
+                <button type="button" class="btn btn-outline-secondary border border-secondary cancel-btn"
+                    (click)="closeModal()" [disabled]="isstatus || (isLoading$ | async)">Cancel</button>
+                <button [disabled]="!GroupaForm.valid" (click)="submit()" type="button"
+                    class="btn btn-light-primary ms-2 submit-btn">  <span *ngIf="!(isLoading$ | async)">Add</span>
+                    <span *ngIf="isLoading$ | async" class="spinner-border spinner-border-sm align-middle ms-2"></span></button>
+            </div>
+        </div>
+    </form>
+</div>

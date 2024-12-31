@@ -1,0 +1,14 @@
+.position-relative {
+    position: relative;
+  }
+  .relative-position {
+    position: relative;
+  }
+  .calendar-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 20px; 
+    cursor: pointer;
+  }

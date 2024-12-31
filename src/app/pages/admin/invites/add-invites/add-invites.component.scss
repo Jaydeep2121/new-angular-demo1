@@ -1,0 +1,76 @@
+::ng-deep {
+  .cdk-overlay-container {
+    z-index: 1200;
+  }
+  .ng-select-container {
+    border: none !important;
+    background: #F8F8F8 !important;
+    min-height: 45px !important;
+    }
+    .ng-input {
+      padding-top: 6px !important;
+      }
+      
+}
+
+:host ::ng-deep .ng-select-container {
+  border: none !important;
+  background-color: #f8f8f8 !important;
+  min-height: 45px !important;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+.input-file {
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;  
+}
+
+.col-lg-12 {
+@media only screen and (max-width: 990px) {
+  .country-select, .city-select {
+    margin-bottom: 1.5rem;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .btn {
+    .cancel-btn,.submit-btn {
+      width: auto;
+    }
+  }
+}
+}
+
+.user-input-txtbox {
+background-color: #f0f0f0 !important;
+}
+
+.user-input-btn {
+width: 100%;
+font-size: 15px;
+}
+
+.resize-none {
+  resize: none;
+}
+
+.relative-position {
+  position: relative;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.calendar-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 20px; 
+  cursor: pointer;
+}

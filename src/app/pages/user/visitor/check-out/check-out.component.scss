@@ -1,0 +1,70 @@
+.container {
+    padding: 20px;
+}
+
+.qr-reader-container {
+    margin-bottom: 20px;
+    display: none;
+}
+
+.qr-reader {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.card-container {
+    display: none;
+    width: 100%;
+    background-color: #F0F0F0;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px 0;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.label {
+    width: 30%;
+    font-weight: bold;
+}
+
+.value {
+    width: 70%;
+    font-weight: bold;
+}
+
+.check-in-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #F0F0F0;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.check-in-btn:hover {
+    background-color: #F0F0F0;
+}
+
+.error-message{
+    color: red;
+}
+
+.qr-code {
+    display: block;
+}
+.input-type-container{
+display: flex;
+justify-content: space-around;
+}

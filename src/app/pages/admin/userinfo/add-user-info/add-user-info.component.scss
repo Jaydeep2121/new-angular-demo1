@@ -1,0 +1,36 @@
+.input-file {
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.profile-name{
+	color: #979BAD;
+}
+  
+:host ::ng-deep .ng-select-container {
+    border: none !important;
+    background-color: #f8f8f8 !important;
+    min-height: 45px !important;
+}
+
+.col-lg-12 {
+	@media only screen and (max-width: 990px) {
+		.country-select, .city-select {
+			margin-bottom: 1.5rem;
+		}
+	}
+	@media only screen and (max-width: 375px) {
+		.btn {
+			.cancel-btn,.submit-btn {
+			  width: auto;
+			}
+		}
+	}
+}
+
+.user-input-btn{
+	width: 100%;
+	font-size: 15px;
+}

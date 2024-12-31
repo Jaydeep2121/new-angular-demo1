@@ -1,0 +1,57 @@
+<div class="collapse show">
+    <form novalidate class="form" [formGroup]="SchoolMasterForm">
+        <div class="card-body p-2 d-flex flex-column w-100">
+            <div class="mb-6 w-100" >
+                <input type="text" formControlName="schoolName" placeholder="Enter school Name" class="form-control form-control-lg form-control-solid" />
+                <span class="error-text" *ngIf="isControlInvalidWrapper('schoolName')">
+                    *Please enter schoolname
+                </span>
+            </div>
+            <div class="mb-6 w-100">
+                <input type="file" accept=".png, .jpg, .jpeg" (change)="onFileChange($event)" (blur)="touched = true"
+                class="form-control input-file" name="file" id="file" />
+              <label for="file"
+                class="btn d-flex justify-content-between form-control form-control-lg form-control-solid align-items-center ">
+                <span class="profile-name">Upload Your File</span>
+                <i class="icon fa fa-upload"></i>
+              </label>
+              <div *ngIf="selectedFile && !file?.hasError('invalidFileType') && !errorMessage">
+                <div class="d-flex flex-column ">
+                  <small class="profile-name">{{ selectedFile.name }}</small>
+                  <div class="d-flex w-100 justify-content-between">
+                    <small class="profile-name">{{ getFileSize(selectedFile.size) }}</small>
+                    <i class="ki-outline ki-cross-circle text-gray-700" style="font-size: 22px;" (click)="removeSelectedFile()"></i>
+                  </div>
+                  </div>
+                  <div class="progress mt-1">
+                    <div class="progress-bar" role="progressbar" [style.width.%]="progress">
+                    {{ progress.toFixed(0) }}%
+                  </div>
+                </div>
+              </div>
+              <span *ngIf="editFileName"><b>{{editFileName}}</b></span>
+              <small *ngIf="touched && !this.selectedFile" class="error-text">*File is required</small>
+              <small *ngIf="file?.hasError('invalidFileType') && this.selectedFile" class="error-text">*Please choose a
+                PNG or
+                JPG or JPEG file.</small>
+            </div>
+            <div class="text-center mb-3">
+                <span class="text-danger" *ngIf="errorMessage">
+                  {{errorMessage}}
+                </span>
+                <span class="text-success" *ngIf="successText">
+                  {{successText}}
+               </span>
+            </div>
+            <div class="card-footer d-flex justify-content-center align-items-center  w-100">
+                <button type="button" class="btn btn-outline-secondary border border-secondary cancel-btn"
+                    (click)="closeModal()" [disabled]="(isLoading$ | async)">Cancel</button>
+                <button [disabled]="!SchoolMasterForm.valid || (isLoading$ | async) || progress !== 100" (click)="onSubmit()" type="button"
+                    class="btn btn-light-primary ms-2 submit-btn">
+                    <span *ngIf="!(isLoading$ | async)">Add</span>
+                    <span *ngIf="isLoading$ | async" class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

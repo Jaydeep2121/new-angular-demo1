@@ -1,0 +1,225 @@
+<div class="collapse show">
+    <form novalidate class="form" [formGroup]="addMultipleInviteForm">
+        <div class="card-body p-2">
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6 fv-row">
+                            
+                            <ng-select formControlName="group" [items]="groupList" bindLabel="text"
+                                placeholder="Select a Group" class="ng-class" (change)="onGroupSelect($event)">
+                                <ng-template ng-label-tmp let-item="item">
+                                    {{ item.text }}
+                                </ng-template>
+                            </ng-select>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('group')">
+                                *Please select group
+                            </span>
+
+                            <!-- <ng-select [items]="groupList" [clearSearchOnAdd]="true" [closeOnSelect]="false"
+                                [multiple]="true" placeholder="Select Group" class="multiple-select" 
+                                clearAllText="Clear" formControlName="groups" [bindLabel]="'groupName'" (change)="onSectionSelect($event)">
+                                <ng-template ng-header-tmp>
+                                <button (click)="selectAll('groups')" class="btn selection-btn btn-sm btn-secondary me-2">Select all</button>
+                                <button (click)="unselectAll('groups')" class="btn selection-btn btn-sm btn-secondary">Unselect all</button>
+                                </ng-template>
+                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                <div class="check-box">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"  [ngModelOptions]="{standalone: true}"/>
+                                {{item['groupName']}}
+                                </div>
+                                </ng-template>
+                                <ng-template ng-multi-label-tmp let-items="items">
+                                <div *ngFor="let item of items; let i = index">
+                                    <div class="ng-value" *ngIf="i < 1">
+                                    {{ item['groupName'] }}
+                                    </div>
+                                </div>
+                                <div class="ng-value" *ngIf="items.length > 1">
+                                    <span class="ng-value-label">{{items.length - 1}} more...</span>
+                                </div>
+                                </ng-template>
+                            </ng-select>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('groups')">
+                                *Please select group
+                            </span> -->
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <ng-select [items]="filteredVisiterList" [clearSearchOnAdd]="true" [closeOnSelect]="false"
+                                [multiple]="true" placeholder="Select Visitors" class="multiple-select"
+                                clearAllText="Clear" formControlName="visitor" [bindLabel]="'fullName'">
+                                <ng-template ng-header-tmp>
+                                <button (click)="selectAll('visitor')" class="btn selection-btn btn-sm btn-secondary me-2">Select all</button>
+                                <button (click)="unselectAll('visitor')" class="btn selection-btn btn-sm btn-secondary">Unselect all</button>
+                                </ng-template>
+                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                <div class="check-box">
+                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"  [ngModelOptions]="{standalone: true}"/>
+                                {{item['fullName']}}
+                                </div>
+                                </ng-template>
+                                <ng-template ng-multi-label-tmp let-items="items">
+                                <div *ngFor="let item of items; let i = index">
+                                    <div class="ng-value" *ngIf="i < 1">
+                                    {{ item['fullName'] }}
+                                    </div>
+                                </div>
+                                <div class="ng-value" *ngIf="items.length > 1">
+                                    <span class="ng-value-label">{{items.length - 1}} more...</span>
+                                </div>
+                                </ng-template>
+                            </ng-select>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('visitor')">
+                            *Please select visitor
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6 fv-row">
+                            <input type="text" class="form-control form-control-lg form-control-solid"
+                                placeholder="Location" formControlName="location" />
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('location')">*Location is
+                                required</span>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <ng-select formControlName="host" [items]="hostlistData" bindLabel="text"
+                                placeholder="Select a Host" class="ng-class">
+                                <ng-template ng-label-tmp let-item="item">
+                                    {{ item.text }}
+                                </ng-template>
+                            </ng-select>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('host')">
+                                *Please select host
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6 fv-row relative-position">
+                            <div class="position-relative">
+                                <input
+                                    class="form-control form-control-lg form-control-solid"
+                                    formControlName="checkInDateTime"
+                                    [owlDateTime]="chekIndt"
+                                    placeholder="Ex Check In"
+                                />
+                                <i class="ki-outline ki-calendar-add text-gray-700 fs-2tx calendar-icon" [owlDateTimeTrigger]="chekIndt"></i>
+                                <owl-date-time #chekIndt></owl-date-time>
+                            </div>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('checkInDateTime')">
+                                *Checkin Time is required
+                            </span>
+                        </div>
+                        <div class="col-lg-6 fv-row relative-position">
+                            <div class="position-relative">
+                                <input
+                                    class="form-control form-control-lg form-control-solid"
+                                    formControlName="checkOutDateTime"
+                                    [owlDateTime]="chekOutdt"
+                                    placeholder="Ex Check Out"
+                                />
+                                <i class="ki-outline ki-calendar-add text-gray-700 fs-2tx calendar-icon" [owlDateTimeTrigger]="chekOutdt"></i>
+                                <owl-date-time #chekOutdt></owl-date-time>
+                            </div>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('checkOutDateTime')">
+                                *Checkout Time is required
+                            </span>
+                        </div>
+                    </div>
+                    <span class="error-text" *ngIf="addMultipleInviteForm.hasError('dateTimeMismatch')">
+                        *Checkin Time should be earlier than Checkout Time
+                    </span>
+                </div>
+            </div>
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6 fv-row relative-position">
+                            <div class="position-relative">
+                                <input
+                                    class="form-control form-control-lg form-control-solid"
+                                    [min]="minDate"
+                                    formControlName="inviteDateTime"
+                                    [owlDateTime]="invDate"
+                                    placeholder="Invite Date"
+                                />
+                                <i class="ki-outline ki-calendar-add text-gray-700 fs-2tx calendar-icon" [owlDateTimeTrigger]="invDate"></i>
+                                <owl-date-time #invDate></owl-date-time>
+                            </div>
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('inviteDateTime')">
+                                *Invite-date is required
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <input type="text" class="form-control form-control-lg form-control-solid" placeholder="On premises"
+                    formControlName="premises" />
+                    <span class="error-text" *ngIf="isControlInvalidWrapper('premises')">*Premises is
+                        required</span>
+                </div>
+            </div>
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6 fv-row">
+                            <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Comment"
+                                formControlName="comment" />
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('comment')">*Comment is
+                                required</span>
+                        </div>
+                        <div class="col-lg-6 fv-row">
+                            <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Purpose"
+                                formControlName="purpose" />
+                            <span class="error-text" *ngIf="isControlInvalidWrapper('purpose')">*Purpose is
+                                required</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-6">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6 fv-row">
+                            <ng-select formControlName="subType" [items]="subTypeList" bindLabel="text" placeholder="Select a SubType" >
+                                <ng-template ng-label-tmp let-item="item">
+                                  {{ item.text }}
+                                </ng-template>
+                              </ng-select>
+                              <span class="error-text" *ngIf="isControlInvalidWrapper('subType')">
+                                *Please select sub-type
+                              </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="text-center mb-3">
+            <span class="text-danger" *ngIf="!!errorMessage">
+              {{errorMessage}}
+            </span>
+            <span class="text-success" *ngIf="!!successMessage">
+              {{successMessage}}
+           </span>
+          </div>
+        <div class="card-footer d-flex justify-content-center align-items-center w-100">
+            <button type="button" class="btn btn-outline-secondary border border-secondary w-25 cancel-btn"
+                (click)="closeModal()" [disabled]="isstatus || (isLoading$ | async)">Cancel</button>
+            <button [disabled]="!addMultipleInviteForm.valid || isstatus" (click)="submit()" type="button"
+                class="btn btn-light-primary ms-2 w-25 submit-btn">
+                <span *ngIf="!(isLoading$ | async)">Add</span>
+                <span *ngIf="isLoading$ | async" class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </button>
+        </div>
+    </form>
+</div>

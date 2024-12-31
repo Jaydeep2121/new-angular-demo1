@@ -1,0 +1,224 @@
+<ng-container *ngIf="userType==='admin'">
+  <!-- Dashboard -->
+<div class="menu-item">
+  <a
+    class="menu-link without-sub"
+    routerLink="/admin/dashboard"
+    routerLinkActive="active"
+    ><span class="menu-icon">
+      <i class="ki-outline ki-home text-gray-700 icon-size"></i>
+    </span>
+    <span class="menu-title">Dashboard</span
+  ></a>
+</div>
+
+<!-- Visitor -->
+<div class="menu-item">
+  <a
+    class="menu-link without-sub"
+    routerLink="/admin/visitor"
+    routerLinkActive="active"
+    ><span class="menu-icon">
+      <i class="ki-outline ki-user-square text-gray-700 icon-size"></i>
+    </span
+    ><span class="menu-title">Visitor</span></a
+  >
+</div>
+
+<!-- Pre Registration -->
+<!-- <div class="menu-item">
+  <a
+    class="menu-link without-sub"
+    routerLink="/admin/pre-registration"
+    routerLinkActive="active"
+    ><span class="menu-icon">
+      <i class="ki-outline ki-social-media text-gray-700 icon-size"></i> </span
+    ><span class="menu-title">Pre Registration</span></a
+  >
+</div> -->
+
+<!-- Watch List -->
+<div class="menu-item">
+  <a
+    class="menu-link without-sub"
+    routerLink="/admin/watch-list"
+    routerLinkActive="active"
+    ><span class="menu-icon">
+      <i class="ki-outline ki-tablet-text-down text-gray-700 icon-size"></i> </span
+    ><span class="menu-title">Watch List</span></a
+  >
+</div>
+  <!-- invites -->
+  <div class="menu-item">
+    <a
+      class="menu-link without-sub"
+      routerLink="/admin/invites"
+      routerLinkActive="active"
+      ><span class="menu-icon">
+        <i class="ki-outline ki-notification-status text-gray-700 icon-size"></i>
+        </span
+      ><span class="menu-title">Invites</span></a
+    >
+  </div>
+
+<!-- Manage Gates -->
+<!-- <div class="menu-item">
+<a class="menu-link without-sub" routerLink="/admin/manage-gates" routerLinkActive="active"><span class="menu-icon">
+    <i class="ki-outline ki-technology-4 text-gray-700 icon-size"></i>
+  </span><span class="menu-title">Manage Gates</span></a>
+</div> -->
+<!-- Multiple Invites -->
+<div class="menu-item">
+  <a
+    class="menu-link without-sub"
+    routerLink="/admin/multiple-invites"
+    routerLinkActive="active"
+    ><span class="menu-icon">
+      <i class="ki-outline ki-sort text-gray-700 icon-size"></i>
+      </span
+    ><span class="menu-title">Multiple Invites</span></a
+  >
+</div>
+
+  
+  <!-- Checkin Approved Request -->
+  <div class="menu-item">
+    <a class="menu-link without-sub" routerLink="/admin/checkin-approved-request" routerLinkActive="active"><span
+        class="menu-icon">
+        <i class="ki-outline ki-verify text-gray-700 icon-size"></i>
+      </span><span class="menu-title">CheckIn Approval</span></a>
+  </div>
+
+  <div class="menu-item">
+    <a class="menu-link without-sub" routerLink="/admin/groups" routerLinkActive="active"><span class="menu-icon">
+        <i class="ki-outline ki-people text-gray-700  icon-size"></i>
+      </span><span class="menu-title">Groups</span></a>
+      
+  </div>
+
+   <!-- Checkin Approved Request -->
+   <div class="menu-item">
+    <a class="menu-link without-sub" routerLink="/admin/school-visit" routerLinkActive="active"><span class="menu-icon">
+        <i class="ki-outline ki-maximize text-gray-700 icon-size"></i> 
+      </span><span class="menu-title">School Configuration</span></a>
+  </div>
+  
+  <div class="menu-item">
+    <a class="menu-link without-sub" routerLink="/admin/user-master" routerLinkActive="active"><span class="menu-icon">
+        <i class="ki-outline ki-maximize text-gray-700 icon-size"></i> 
+      </span><span class="menu-title">User Master</span></a>
+  </div>
+  
+  <!-- Checkin Approved Request -->
+  <!-- <div class="menu-item">
+    <a class="menu-link without-sub" routerLink="/admin/user-info" routerLinkActive="active"><span class="menu-icon">
+        <i class="ki-outline ki-user-edit text-gray-700 icon-size"></i>
+      </span><span class="menu-title">User Info</span></a>
+  </div> -->
+  
+  <div class="menu-item">
+    <a class="menu-link without-sub" routerLink="/admin/reports" routerLinkActive="active"><span class="menu-icon">
+        <i class="ki-outline ki-burger-menu text-gray-700 icon-size"></i>
+      </span><span class="menu-title">Reports</span></a>
+  </div>
+</ng-container>
+<ng-container *ngIf="userType==='user'">
+<!-- Dashboard -->
+<div class="menu-item">
+  <a
+    class="menu-link without-sub"
+    routerLink="/user/dashboard"
+    routerLinkActive="active"
+    ><span class="menu-icon">
+      <i class="ki-outline ki-home text-gray-700 icon-size"></i>
+    </span>
+    <span class="menu-title">Dashboard</span
+  ></a>
+</div>
+
+<!-- checkIn -->
+<div class="menu-item">
+  <a
+    class="menu-link without-sub"
+    routerLink="/user/qrscan"
+    routerLinkActive="active"
+    ><span class="menu-icon">
+      <i class="ki-outline bi bi-qr-code-scan text-gray-700 icon-size"></i>
+    </span
+    ><span class="menu-title">CheckIn</span></a
+  >
+</div>
+
+ <!-- CheckOut -->
+<div class="menu-item">
+  <a
+    class="menu-link without-sub"
+    routerLink="/user/checkout"
+    routerLinkActive="active"
+    ><span class="menu-icon">
+      <i class="ki-outline bi bi-clipboard-check text-gray-700 icon-size"></i>
+    </span
+    ><span class="menu-title">CheckOut</span></a
+  >
+</div>
+
+<!-- Visitor -->
+<!-- <div class="menu-item">
+  <a
+    class="menu-link without-sub"
+    routerLink="/user/checkin"
+    routerLinkActive="active"
+    ><span class="menu-icon">
+      <i class="ki-outline ki-user-square text-gray-700 icon-size"></i>
+    </span
+    ><span class="menu-title">Visitor</span></a
+  >
+</div> -->
+
+<!-- Pre Registration -->
+<div class="menu-item">
+<a
+  class="menu-link without-sub"
+  routerLink="/user/pre-registration"
+  routerLinkActive="active"
+  ><span class="menu-icon">
+    <i class="ki-outline ki-social-media text-gray-700 icon-size"></i> </span
+  ><span class="menu-title">Pre-Registration</span></a
+>
+</div>
+
+<!-- Pre Registration -->
+<div class="menu-item">
+  <a
+    class="menu-link without-sub"
+    routerLink="/user/regster-checkIn"
+    routerLinkActive="active"
+    ><span class="menu-icon">
+      <i class="ki-outline ki-notepad-edit text-gray-700 icon-size"></i> </span
+    ><span class="menu-title">Register & CheckIn</span></a
+  >
+</div>
+</ng-container>
+<ng-container *ngIf="userType==='master'">
+  <!-- School Master -->
+  <div class="menu-item">
+    <a class="menu-link without-sub" routerLink="/master/school-master" routerLinkActive="active"><span class="menu-icon">
+        <i class="ki-outline ki-maximize text-gray-700 icon-size"></i> 
+      </span><span class="menu-title">School Master</span></a>
+  </div>
+
+  <!-- Site Master -->
+  <div class="menu-item">
+    <a class="menu-link without-sub" routerLink="/master/site-master" routerLinkActive="active"><span class="menu-icon">
+        <i class="ki-outline ki-maximize text-gray-700 icon-size"></i> 
+      </span><span class="menu-title">Site Master</span></a>
+  </div>
+  
+  <!-- User Master -->
+  <div class="menu-item">
+    <a class="menu-link without-sub" routerLink="/master/user-master" routerLinkActive="active"><span class="menu-icon">
+        <i class="ki-outline ki-maximize text-gray-700 icon-size"></i> 
+      </span><span class="menu-title">User Master</span></a>
+  </div>
+  
+  </ng-container>

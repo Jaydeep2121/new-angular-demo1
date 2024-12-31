@@ -1,0 +1,63 @@
+<div class="login-wrapper d-flex justify-content-center align-items-center">
+  <div class="card box">
+    <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()" class="card-body example-form">
+      <div class="user-credentials">
+        <div class="form-group">
+          <label class="form-label fs-6 fw-bolder text-dark">Email</label>
+          <input type="text" class="form-control" placeholder="User name" formControlName="username">
+          <span class="text-danger"
+            *ngIf="loginFormGroup.get('username')?.hasError('username') && isControlInvalidWrapper('username')">
+            *Please enter a valid email
+          </span>
+          <span class="text-danger"
+              *ngIf="isControlInvalidWrapper('username') && loginFormGroup.get('username')?.hasError('required')">
+              *Email is required
+          </span>
+        </div>
+        <div class="form-group mt-3">
+          <label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
+          <input type="password" class="form-control" placeholder="Password" formControlName="password">
+            <span *ngIf="isControlInvalidWrapper('password')" class="text-danger">
+              *Password is required
+            </span>
+        </div>
+        <div class="d-flex mt-3" [class.invalid-btn]="!loginFormGroup.valid">
+          <button type="button" class="btn btn-primary btn-get-details" (click)="getDetails()"  [disabled]="!loginFormGroup.get('username').valid || !loginFormGroup.get('password').valid">
+              <span *ngIf="!(isLoading$ | async)">Get Details</span>
+            <span *ngIf="isLoading$ | async" class="spinner-border spinner-border-sm align-middle ms-2"></span>
+          </button>
+        </div>
+      </div>
+      <div class="user-school-details mt-3" *ngIf="isOpen">
+        <div class="school-names">
+          <ng-select formControlName="schoolNames" [items]="schoolNamesList" bindLabel="text" 
+              placeholder="Select school-name" class="ng-class">
+              <ng-template ng-label-tmp let-item="item">
+                  {{ item.text }}
+              </ng-template>
+          </ng-select>
+          <span class="error-text" *ngIf="isControlInvalidWrapper('schoolNames')">
+              *Please select schoolName
+          </span>
+        </div>
+        <div class="site-names mt-3">
+          <ng-select formControlName="schoolSiteNames" [items]="schoolSiteNamesList" bindLabel="text" 
+              placeholder="Select site-name" class="ng-class">
+              <ng-template ng-label-tmp let-item="item">
+                  {{ item.text }}
+              </ng-template>
+          </ng-select>
+          <span class="error-text" *ngIf="isControlInvalidWrapper('schoolSiteNames')">
+              *Please select schoolSiteName
+          </span>
+        </div>
+        <div class="d-flex mt-3" [class.invalid-btn]="!loginFormGroup.valid">
+          <button type="submit" class="btn btn-primary btn-submit" [disabled]="!loginFormGroup.valid">
+            Login
+          </button>
+        </div>
+      </div>
+      <!-- <a routerLink="/forget-pass" class="forget-pass mt-2">Forgot password?</a> -->
+    </form>
+  </div>
+</div>
